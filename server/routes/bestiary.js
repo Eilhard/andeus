@@ -13,7 +13,7 @@ let fileBuf = fs.readFileSync(dataFile, 'utf8');
 fileBuf = JSON.parse(fileBuf);
 fileBuf.besties.forEach(bestia => besties.push(bestia));
 
-let lastAuthorId = besties.reduce((max, item) => { if (item.id > max) { return item.id} else { return max } }, 0);
+let lastId = besties.reduce((max, item) => { if (item.id > max) { return item.id} else { return max } }, 0);
 
 datafunc.saveLocalData(dataFile, 'besties', besties);
 
@@ -40,17 +40,43 @@ router.get('/name/:name', (req, res) => {
 });
 
 router.post('', (req, res) => {
-
+  let bestia = {
+  id: lastId += 1,
+  name: req.body.name,
+  race: req.body.race,
+  lvl: req.body.lvl,
+  hp: req.body.hp,
+  energy: req.body.energy,
+  loot: req.body.loot,
+}
+  besties.push(author);
+  res.send(author);
 });
 
 router.patch('/:id', (req, res) => {
-
+  let bestiaId = parseInt(req.params.id);
+  let index;
+  besties.forEach((item, itemIndex) => {
+    if (item.id == bestiaId) {
+      item.name = req.body.name;
+      item.race = req.body.race;
+      item.lvl = req.body.lvl;
+      item.hp = req.body.hp;
+      item.energy = req.body.energy;
+      item.loot = req.body.loot;
+      index = itemIndex;
+    }
+  })
+  res.send(besties[index]);
 });
 
 router.delete('/:id', (req, res) => {
-
+  let bestiaId = parseInt(req.params.id);
+  besties = besties.filter(item => item.id != bestiaId);
+  res.send(besties);
 });
 
+/* Just test */
 router.get('/img/fairy', function (req, res) {
     res.sendFile(path.resolve(__dirname, '../img/bestiary/fairy.jpg'));
 });
