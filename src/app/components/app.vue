@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
     <nav class="global-nav">
-      <button v-on:click="navButtons('Bestiary')" class="global-nav__button">Bestiary</button>
-      <button v-on:click="navButtons('Editor')" class="global-nav__button">Editor</button>
+      <button v-on:click="navButtons('bestiary')" class="global-nav__button">Bestiary</button>
+      <button v-on:click="navButtons('editor')" class="global-nav__button">Editor</button>
     </nav>
     <div v-show="buttons.bestiary" class="app-container__card-holder">
       <bestia-card v-for="bestia in besties" :key="bestia.id"
@@ -43,7 +43,13 @@
     },
     methods: {
       navButtons(btnName) {
-        alert(btnName);
+        for (let key in this.buttons) {
+          if (key == btnName) {
+             this.buttons[key] = true;
+             continue;
+          }
+          this.buttons[key] = false;
+        }
       },
       syncBesties() {
         axiBeast('bestia').then(res => {
@@ -59,6 +65,8 @@
 </script>
 
 <style scoped>
+  $default-indent: 10px;
+
   .app-container {
     display: flex;
     justify-content: center;
@@ -68,6 +76,7 @@
       display: flex;
       align-items: center;
       flex-direction: column;
+      padding: $default-indent;
     }
   }
 

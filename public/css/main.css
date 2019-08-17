@@ -1,0 +1,145 @@
+/* http://meyerweb.com/eric/tools/css/reset/ */
+/* v1.0 | 20080212 */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.root-container {
+  min-height: 100vh;
+  background-color: #EEEEEE; }
+
+.beastia-card[data-v-485edd2e] {
+  width: 500px;
+  background-color: #FFFFFF;
+  margin-bottom: 10px;
+}
+.beastia-card[data-v-485edd2e]:last-child {
+    margin: 0;
+}
+.beastia-card-header[data-v-485edd2e] {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 0 10px;
+    background-color: lightblue;
+}
+.beastia-card-header__title[data-v-485edd2e] {
+      font-size: 25px;
+      font-weight: bold;
+      text-transform: capitalize;
+      letter-spacing: 1px;
+      text-shadow: 0 0 2px rgba(14, 13, 13, 0.3);
+}
+.beastia-card-header__openBtn[data-v-485edd2e] {
+      display: inline;
+      font-size: 25px;
+      background: none;
+      border: none;
+}
+.beastia-card-header__openBtn[data-v-485edd2e]:hover {
+        cursor: pointer;
+}
+
+.app-container[data-v-41a041ef] {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.app-container__card-holder[data-v-41a041ef] {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+}
+.global-nav[data-v-41a041ef] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 60px;
+  color: #FFFFFF;
+  background-color: #323232;
+}
+@media (max-width: 400px) {
+.global-nav[data-v-41a041ef] {
+      height: auto;
+}
+}
+.global-nav__button[data-v-41a041ef] {
+    width: 100px;
+    height: 100%;
+    font-family: monospace;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    color: #747474;
+    background-color: #323232;
+}
+.global-nav__button--pressed[data-v-41a041ef] {
+      color: #FFFFFF;
+}
+.global-nav__button[data-v-41a041ef]:hover {
+      color: #FFFFFF;
+      background-color: #252525;
+      cursor: pointer;
+}
+@media (max-width: 400px) {
+.global-nav__button[data-v-41a041ef] {
+        width: 100%;
+        height: 40px;
+}
+}
+
