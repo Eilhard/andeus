@@ -1,25 +1,39 @@
 <template>
   <div>
-    <title-vue v-bind:name="pokemon.name":say="pokemon.say":lvl="pokemon.lvl" ></title-vue>
-    <title-vue v-bind:say="pokemon.say":lvl="pokemon.lvl" ></title-vue>
+
+    <bestia-card v-for="bestia in besties" :key="bestia.id"
+      :name="bestia.name"
+      :race="bestia.race"
+      :lvl="bestia.lvl"
+      :hp="bestia.hp"
+      :energy="bestia.energy"
+      :loot="bestia.loot">
+    </bestia-card>
   </div>
 </template>
 
 <script>
-  import Title from './title.vue';
+  import axiBeast from '../ads/axibeast.js'
+  import BestiaCard from './bestiacard.vue';
 
   export default {
     data() {
       return {
-          pokemon: {
-            name: "Charmander",
-            say: "Bulba-bulba",
-            lvl: 10
-          },
+        besties: null,
+      }
+    },
+    mounted() {
+      axiBeast('bestia').then(res => {
+        this.besties = res.data;
+      });
+    },
+    methods: {
+      getBesties() {
+
       }
     },
     components: {
-      titleVue: Title
+      BestiaCard: BestiaCard,
     }
   }
 
