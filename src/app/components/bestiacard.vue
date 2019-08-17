@@ -55,7 +55,8 @@ export default {
 
 <style scoped>
   .beastia-card {
-
+    width: 600px;
+    background-color: #FFFFFF;
   }
   .title {
     color: lightblue;

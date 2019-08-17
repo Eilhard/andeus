@@ -1,3 +1,7 @@
-.test {
-  background-color: lightblue;
+@import './reset.css';
+@import './variables.scss';
+
+.root-container {
+  min-height: 100vh;
+  background-color: $bg-page;
 }
