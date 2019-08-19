@@ -12,6 +12,7 @@
       </button>
     </header>
     <div v-show="isOpen" class="beastia-card-body">
+
       <span class="beastia-card-header__lvl">lvl: {{ lvl }}</span>
       Race: {{ race }}
       Loot:
@@ -25,6 +26,7 @@
 
 <script>
   import '../ads/fontawesome.js';
+  import TableItem from ''
 
 export default {
     props: {
@@ -68,6 +70,9 @@ export default {
           this.isOpen = true;
         }
       }
+    },
+    components: {
+
     }
 }
 </script>
