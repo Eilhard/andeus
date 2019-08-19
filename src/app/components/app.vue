@@ -44,7 +44,7 @@
     methods: {
       navButtons(btnName) {
         for (let key in this.buttons) {
-          if (key == btnName) {
+          if (key == btnName.toLowerCase()) {
              this.buttons[key] = true;
              continue;
           }
