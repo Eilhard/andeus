@@ -15,7 +15,11 @@ fileBuf.besties.forEach(bestia => besties.push(bestia));
 
 let lastId = besties.reduce((max, item) => { if (item.id > max) { return item.id} else { return max } }, 0);
 
-datafunc.saveLocalData(dataFile, 'besties', besties);
+let seconds = 20;
+setInterval(() => {
+  datafunc.saveLocalData(dataFile, 'besties', besties);
+}, seconds * 1000);
+
 
 router.get('', (req, res) => {
   res.send(besties);
@@ -49,8 +53,8 @@ router.post('', (req, res) => {
   energy: req.body.energy,
   loot: req.body.loot,
 }
-  besties.push(author);
-  res.send(author);
+  besties.push(bestia);
+  res.send(bestia);
 });
 
 router.patch('/:id', (req, res) => {

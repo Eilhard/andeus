@@ -15,29 +15,31 @@
       </bestia-card>
     </div>
     <div v-show="buttons.editor" class="app-container__card-holder">
-      <form class="">
-        <input type="text">
-      </form>
+      <bestia-editor :besties="besties"
+        v-on:newBestia="newBestia($event)"
+        v-on:deleteBestia="deleteBestia($event)"
+      ></bestia-editor>
     </div>
   </div>
 </template>
 
 <script>
   import axiBeast from '../ads/axibeast.js'
-  import BestiaCard from './bestiacard.vue';
+  import BestiaCard from './bestia_card.vue';
+  import BestiaEditor from './bestia_editor.vue';
 
   export default {
     data() {
       return {
         besties: null,
         buttons: {
-          editor: false,
-          bestiary: true
+          editor: true,
+          bestiary: false
         }
       }
     },
     mounted() {
-      axiBeast('bestia').then(res => {
+      axiBeast.get('bestia').then(res => {
         this.besties = res.data;
       });
     },
@@ -50,15 +52,34 @@
           }
           this.buttons[key] = false;
         }
+        // this.syncBesties().then(() => {
+        //   for (let key in this.buttons) {
+        //     if (key == btnName.toLowerCase()) {
+        //        this.buttons[key] = true;
+        //        continue;
+        //     }
+        //     this.buttons[key] = false;
+        //   }
+        // })
       },
       syncBesties() {
-        axiBeast('bestia').then(res => {
-          this.besties = res.data;
-        });
+        return new Promise((resolve, reject) => {
+          axiBeast.get('bestia').then(res => {
+            this.besties = res.data;
+            resolve();
+          });
+        })
+      },
+      newBestia(event) {
+        this.besties.push(event);
+      },
+      deleteBestia(event) {
+        this.besties = event;
       }
     },
     components: {
-      BestiaCard: BestiaCard,
+      bestiaCard: BestiaCard,
+      bestiaEditor: BestiaEditor,
     }
   }
 
@@ -117,4 +138,7 @@
       }
     }
   }
+
+
+
 </style>

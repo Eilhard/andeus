@@ -1,4 +1,3 @@
-import '../scss/main.scss';
 import Vue from 'vue';
 
 import App from './components/app.vue'
@@ -12,3 +11,5 @@ let app = new Vue({
     return h(App);
   }
 })
+
+import '../scss/main.scss';
