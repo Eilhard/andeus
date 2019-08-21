@@ -1,5 +1,5 @@
 <template>
-  <article class="beastia-card">
+  <article v-show="show" class="beastia-card">
     <header class="beastia-card-header">
       <h2 class="beastia-card-header__title">{{ name }}</h2>
       <button v-on:click="openBody" class="beastia-card-header__openBtn">
@@ -33,6 +33,7 @@
 
 export default {
     props: {
+      show: Boolean,
       name: {
         type: String,
         default: 'unknown creature'

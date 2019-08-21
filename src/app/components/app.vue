@@ -3,8 +3,13 @@
     <global-nav
       v-on:navBtnClick="navBtnClick($event)"
     ></global-nav>
+    <cards-nav
+      v-show="navButtons.bestiary"
+      v-on:search="search($event)"  
+    ></cards-nav>
     <div v-show="navButtons.bestiary" class="app-container__main-holder">
       <bestia-card v-for="bestia in besties" :key="bestia.id"
+        :show="bestia.show"
         :name="bestia.name"
         :race="bestia.race"
         :lvl="bestia.lvl"
@@ -25,7 +30,8 @@
 
 <script>
   import axiBeast from '../ads/axibeast.js'
-  import GlobalNav from './nav.vue';
+  import GlobalNav from './nav_global.vue';
+  import CardsNav from './nav_cards.vue';
   import BestiaCard from './bestia_card.vue';
   import BestiaEditor from './bestia_editor.vue';
 
@@ -41,10 +47,26 @@
     },
     mounted() {
       axiBeast.get('bestia').then(res => {
-        this.besties = res.data;
+        this.besties = res.data.map(item => {
+          item.show = true;
+          return item;
+        });
       });
     },
     methods: {
+      search(string) {
+        if (string == "") {
+          this.besties.forEach(item => { item.show = true; });
+        } else {
+          this.besties.forEach(item => {
+            if (item.name.toLowerCase() == string.toLowerCase()) {
+              item.show = true;
+            } else {
+              item.show = false;
+            }
+          });
+        }
+      },
       navBtnClick(btnName) {
         for (let key in this.navButtons) {
           if (key == btnName.toLowerCase()) {
@@ -84,7 +106,8 @@
     components: {
       bestiaCard: BestiaCard,
       bestiaEditor: BestiaEditor,
-      globalNav: GlobalNav
+      globalNav: GlobalNav,
+      cardsNav: CardsNav
     }
   }
 
