@@ -5,7 +5,7 @@
     ></global-nav>
     <cards-nav
       v-show="navButtons.bestiary"
-      v-on:search="search($event)"  
+      v-on:search="search($event)"
     ></cards-nav>
     <div v-show="navButtons.bestiary" class="app-container__main-holder">
       <bestia-card v-for="bestia in besties" :key="bestia.id"
@@ -96,6 +96,7 @@
             bestia.hp = event.hp;
             bestia.energy = event.energy;
             bestia.loot = event.loot;
+            bestia.show = event.show;
           }
         }
       },

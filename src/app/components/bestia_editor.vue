@@ -61,7 +61,9 @@ export default {
         loot: this.loot,
       }
       axiBeast.post('bestia', bestia).then(res => {
-        this.$emit('newBestia', res.data);
+        let newBestia = res.data;
+        newBestia.show = true;
+        this.$emit('newBestia', newBestia);
       });
     },
     patchBestia() {
@@ -74,13 +76,18 @@ export default {
         loot: this.loot,
       }
       axiBeast.patch(`bestia/${this.id}`, bestia).then(res => {
-        this.$emit('updateBestia', res.data);
+        let updatedBestia = res.data;
+        updatedBestia.show = true;
+        this.$emit('updateBestia', updatedBestia);
       });
     },
     deleteBestia() {
       axiBeast.delete(`bestia/${this.id}`).then(res => {
-        console.log(res);
-        this.$emit('deleteBestia', res.data);
+        let newBestiesArray = res.data.map(item => {
+          item.show = true;
+          return item;
+        });
+        this.$emit('deleteBestia', newBestiesArray);
       });
     }
   },
