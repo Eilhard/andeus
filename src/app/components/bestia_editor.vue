@@ -74,7 +74,7 @@ export default {
         loot: this.loot,
       }
       axiBeast.patch(`bestia/${this.id}`, bestia).then(res => {
-        console.log(res);
+        this.$emit('updateBestia', res.data);
       });
     },
     deleteBestia() {
