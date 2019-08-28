@@ -19,10 +19,12 @@
 </template>
 
 <script>
-import axiBeast from '../ads/axibeast.js';
 
 export default {
   props: {
+    selectDefault: {
+      default: ""
+    },
     besties: {
       type: Array,
       default() {
@@ -39,6 +41,11 @@ export default {
       health: "",
       energy: "",
       loot: [ { title: "Jellopy", min: 1, max: 1 } ]
+    }
+  },
+  watch: {
+    selectDefault() {
+      this.id = this.selectDefault;
     }
   },
   methods: {
@@ -60,14 +67,11 @@ export default {
         energy: this.energy,
         loot: this.loot,
       }
-      axiBeast.post('bestia', bestia).then(res => {
-        let newBestia = res.data;
-        newBestia.show = true;
-        this.$emit('newBestia', newBestia);
-      });
+      this.$emit('newBestia', bestia);
     },
     patchBestia() {
       let bestia = {
+        id: this.id,
         name: this.name,
         race: this.race,
         lvl: this.level,
@@ -75,20 +79,16 @@ export default {
         energy: this.energy,
         loot: this.loot,
       }
-      axiBeast.patch(`bestia/${this.id}`, bestia).then(res => {
-        let updatedBestia = res.data;
-        updatedBestia.show = true;
-        this.$emit('updateBestia', updatedBestia);
-      });
+      this.$emit('updateBestia', bestia);
     },
     deleteBestia() {
-      axiBeast.delete(`bestia/${this.id}`).then(res => {
-        let newBestiesArray = res.data.map(item => {
-          item.show = true;
-          return item;
-        });
-        this.$emit('deleteBestia', newBestiesArray);
-      });
+      this.$emit('deleteBestia', this.id);
+      this.name = "";
+      this.race = "";
+      this.level = "";
+      this.health = "";
+      this.energy = "";
+      this.loot = "";
     }
   },
 }

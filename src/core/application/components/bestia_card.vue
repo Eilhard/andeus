@@ -1,5 +1,5 @@
 <template>
-  <article v-show="show" class="beastia-card">
+  <article class="beastia-card">
     <header class="beastia-card-header">
       <h2 class="beastia-card-header__title">{{ name }}</h2>
       <button v-on:click="openBody" class="beastia-card-header__openBtn">
@@ -28,12 +28,11 @@
 </template>
 
 <script>
-  import '../ads/fontawesome.js';
+  import '../../ads/fontawesome.js';
   import TableItem from './table_item.vue';
 
 export default {
     props: {
-      show: Boolean,
       name: {
         type: String,
         default: 'unknown creature'

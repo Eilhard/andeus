@@ -1,20 +1,44 @@
 <template>
   <nav class="cards-nav">
-    <input v-on:keyup.enter="search(searchInput)" type="text" placeholder="Search" v-model="searchInput" class="cards-nav__input">
-    <button v-on:click="search(searchInput)"  class="cards-nav__button">Search</button>
+    <div class="global-container">
+      <input v-on:keyup.enter="searchName(searchInput)" type="text" placeholder="Search" v-model="searchNameInput" class="cards-nav__input">
+      <select v-model="selectRace" class="cards-nav__input">
+        <option value="all">All</option>
+        <option v-for="race in bestiesRaces" :value="race">{{race}}</option>
+      </select>
+      <button v-on:click="search(searchInput)"  class="cards-nav__button">Search</button>
+    </div>
   </nav>
 </template>
 
 <script>
 export default {
+  props: {
+    bestiesRaces: {
+      type: Array,
+      default() {
+        return []
+      }
+    }
+  },
   data() {
     return {
-      searchInput: "",
+      searchNameInput: "",
+      selectRace: 'all'
     }
   },
   methods: {
-    search(string) {
-      this.$emit('search', this.searchInput);
+    searchName(string) {
+      this.$emit('search', {
+        type: "name",
+        body: this.searchInput
+      });
+    },
+    searchRace(string) {
+      this.$emit('search', {
+        type: "race",
+        body: this.selectRace
+      });
     }
   }
 }

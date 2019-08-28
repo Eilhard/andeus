@@ -5,11 +5,11 @@
     ></global-nav>
     <cards-nav
       v-show="navButtons.bestiary"
+      v-bind:bestiesRaces="bestiesRaces"
       v-on:search="search($event)"
     ></cards-nav>
     <div v-show="navButtons.bestiary" class="app-container__main-holder">
       <bestia-card v-for="bestia in besties" :key="bestia.id"
-        :show="bestia.show"
         :name="bestia.name"
         :race="bestia.race"
         :lvl="bestia.lvl"
@@ -19,7 +19,9 @@
       </bestia-card>
     </div>
     <div v-show="navButtons.editor" class="app-container__main-holder">
-      <bestia-editor :besties="besties"
+      <bestia-editor
+        v-bind:besties="besties"
+        v-bind:selectDefault="bestiaEditorSelect"
         v-on:newBestia="newBestia($event)"
         v-on:updateBestia="updateBestia($event)"
         v-on:deleteBestia="deleteBestia($event)"
@@ -30,31 +32,52 @@
 
 <script>
   import axiBeast from '../ads/axibeast.js'
-  import GlobalNav from './nav_global.vue';
-  import CardsNav from './nav_cards.vue';
-  import BestiaCard from './bestia_card.vue';
-  import BestiaEditor from './bestia_editor.vue';
+  import GlobalNav from './components/nav_global.vue';
+  import CardsNav from './components/nav_cards.vue';
+  import BestiaCard from './components/bestia_card.vue';
+  import BestiaEditor from './components/bestia_editor.vue';
 
   export default {
+    components: {
+      bestiaCard: BestiaCard,
+      bestiaEditor: BestiaEditor,
+      globalNav: GlobalNav,
+      cardsNav: CardsNav
+    },
     data() {
       return {
         besties: null,
+        showBestiesIds: [],
+        bestiaEditorSelect: "",
         navButtons: {
-          editor: true,
-          bestiary: false
+          editor: false,
+          bestiary: true
         }
+      }
+    },
+    computed: {
+      showBesties() {
+        return this.besties.filter(item => this.showBestiesIds.includes(item.id));
+      },
+      bestiesRaces() {
+        if (this.besties) {
+          let types = this.besties.map(item => item.race).filter((item, index, thisArray) => thisArray.indexOf(item) === index);
+          return types;
+        }
+        return [];
       }
     },
     mounted() {
       axiBeast.get('bestia').then(res => {
         this.besties = res.data.map(item => {
-          item.show = true;
+          this.showBestiesIds.push(item.id);
           return item;
         });
       });
     },
     methods: {
-      search(string) {
+      search({ type, body }) {
+        this.showBestiesIds = this.besties.fi
         if (string == "") {
           this.besties.forEach(item => { item.show = true; });
         } else {
@@ -85,30 +108,31 @@
         })
       },
       newBestia(event) {
-        this.besties.push(event);
+        axiBeast.post('bestia', event).then(res => {
+          this.besties.push(res.data);
+          this.bestiaEditorSelect = res.data.id;
+        });
       },
       updateBestia(event) {
-        for (let bestia of this.besties) {
-          if (bestia.id == event.id) {
-            bestia.name = event.name;
-            bestia.race = event.race;
-            bestia.lvl = event.lvl;
-            bestia.hp = event.hp;
-            bestia.energy = event.energy;
-            bestia.loot = event.loot;
-            bestia.show = event.show;
+        axiBeast.patch(`bestia/${this.id}`, bestia).then(res => {
+          let updatedBestia = res.data;
+          for (let bestia of this.besties) {
+            if (bestia.id == updatedBestia.id) {
+              bestia.name = updatedBestia.name;
+              bestia.race = updatedBestia.race;
+              bestia.lvl = updatedBestia.lvl;
+              bestia.hp = updatedBestia.hp;
+              bestia.energy = updatedBestia.energy;
+              bestia.loot = updatedBestia.loot;
+            }
           }
-        }
+        });
       },
       deleteBestia(event) {
-        this.besties = event;
+        axiBeast.delete(`bestia/${event}`).then(res => {
+          this.besties = res.data;
+        });
       }
-    },
-    components: {
-      bestiaCard: BestiaCard,
-      bestiaEditor: BestiaEditor,
-      globalNav: GlobalNav,
-      cardsNav: CardsNav
     }
   }
 
