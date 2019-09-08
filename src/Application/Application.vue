@@ -1,48 +1,17 @@
 <template>
   <div class="app-container">
-    <global-nav
-      v-on:navBtnClick="navBtnClick($event)"
-    ></global-nav>
-    <cards-nav
-      v-show="navButtons.bestiary"
-      v-bind:bestiesRaces="bestiesRaces"
-      v-on:search="search($event)"
-    ></cards-nav>
-    <div v-show="navButtons.bestiary" class="app-container__main-holder">
-      <bestia-card v-for="bestia in besties" :key="bestia.id"
-        :name="bestia.name"
-        :race="bestia.race"
-        :lvl="bestia.lvl"
-        :hp="bestia.hp"
-        :energy="bestia.energy"
-        :loot="bestia.loot">
-      </bestia-card>
-    </div>
-    <div v-show="navButtons.editor" class="app-container__main-holder">
-      <bestia-editor
-        v-bind:besties="besties"
-        v-bind:selectDefault="bestiaEditorSelect"
-        v-on:newBestia="newBestia($event)"
-        v-on:updateBestia="updateBestia($event)"
-        v-on:deleteBestia="deleteBestia($event)"
-      ></bestia-editor>
-    </div>
+    <global-nav></global-nav>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import axiBeast from '../ads/axibeast.js'
-  import GlobalNav from './components/nav_global.vue';
-  import CardsNav from './components/nav_cards.vue';
-  import BestiaCard from './components/bestia_card.vue';
-  import BestiaEditor from './components/bestia_editor.vue';
+  import axios from '../plugins/axios.js'
+  import GlobalNav from './components/GlobalNav.vue';
 
   export default {
     components: {
-      bestiaCard: BestiaCard,
-      bestiaEditor: BestiaEditor,
-      globalNav: GlobalNav,
-      cardsNav: CardsNav
+      GlobalNav: GlobalNav,
     },
     data() {
       return {
@@ -68,12 +37,12 @@
       }
     },
     mounted() {
-      axiBeast.get('bestia').then(res => {
-        this.besties = res.data.map(item => {
-          this.showBestiesIds.push(item.id);
-          return item;
-        });
-      });
+      // axiBeast.get('bestia').then(res => {
+      //   this.besties = res.data.map(item => {
+      //     this.showBestiesIds.push(item.id);
+      //     return item;
+      //   });
+      // });
     },
     methods: {
       search({ type, body }) {

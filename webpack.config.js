@@ -4,7 +4,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   mode: "development",
-  entry: "./src/core/index.js",
+  entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "./public/"),
     filename: "./js/main.js"
@@ -44,19 +44,41 @@ module.exports = {
           },
           {
             loader: 'css-loader'
-          },
-          {
-            loader: 'sass-loader'
           }
         ]
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: './img/'
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)(\??\#?v=[.0-9]+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: './fonts/'
+            },
+          },
+        ],
       }
     ],
   },
   devServer: {
     inline:true,
     host: '0.0.0.0',
-    port: 18000,
+    port: 18001,
     contentBase: path.join(__dirname, 'public'),
+    historyApiFallback: true // Fix problem with vue-router in spa
   },
   plugins: [
     new VueLoaderPlugin(),

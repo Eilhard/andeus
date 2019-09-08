@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const app = express();
+const history = require('connect-history-api-fallback');
 
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
-const favicon = require('serve-favicon');
 
-app.use(favicon(path.join(__dirname, 'img', 'favicon.ico')));
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -18,11 +17,14 @@ app.use((req, res, next) => {
 });
 
 /* Routes */
-let bestiary = require('./routes/bestiary.js');
-app.use('/bestia', bestiary);
+let bestiary = require('./server/routes/bestiary.js');
+app.use('/api/bestia', bestiary);
 
-app.get('/', (req, res) => {
-  res.send("Hello from Andeus API");
-})
+app.use(history());
+app.use(express.static(path.join(__dirname, './public/')));
 
-app.listen(3000, '0.0.0.0', () => { console.log("Api initiated"); })
+let config = {
+    ip: '0.0.0.0',
+    port: 18000
+}
+app.listen(config.port, config.ip, () => { console.log(`Server initiated on ${config.ip}:${config.port}`); })

@@ -83,6 +83,8 @@ export default {
 <style scoped>
   $default-indent: 10px;
   $border-radius: 3px;
+  $primary-color: #ADD8E6;
+  $secondary-color: darken(#ADD8E6, 65%);
 
   .beastia-card {
     width: 500px;
@@ -90,6 +92,7 @@ export default {
     margin-bottom: $default-indent;
     border-radius: $border-radius;
     overflow: hidden; /* This for fixing header border-radius */
+    color: $secondary-color;
 
     &:last-child {
       margin: 0;
@@ -101,13 +104,13 @@ export default {
       align-items: center;
       height: 60px;
       padding: 0 $default-indent;
-      background-color: lightblue;
+      background-color: $primary-color;
       &__title {
         font-size: 25px;
         font-weight: bold;
         text-transform: capitalize;
         letter-spacing: 1px;
-        text-shadow: 0 0 2px rgba(14, 13, 13, 0.3);
+        text-shadow: 0 0 2px rgba($secondary-color, 0.3);
       }
       &__openBtn {
         display: inline;

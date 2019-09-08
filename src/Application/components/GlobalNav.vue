@@ -1,14 +1,16 @@
 <template>
   <nav class="global-nav">
-    <button v-for="btn in buttons"
+    <router-link :to="{ name: '', params: {} }"></router-link>
+    <!-- <button v-for="btn in buttons"
      v-on:click="navButtons(btn)"
      :class="[ 'global-nav__button', btn.pressed ? 'global-nav__button--pressed' : '']"
-   >{{btn.name}}</button>
+   >{{btn.name}}</button> -->
   </nav>
 </template>
 
 <script>
 export default {
+  name: 'GlobalNav',
   data() {
     return {
       buttons: [

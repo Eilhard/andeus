@@ -22,6 +22,7 @@
 
 <style scoped>
   $default-indent: 10px;
+  $primary-color: #ADD8E6;
 
   .stat-item {
     display: flex;
@@ -31,11 +32,11 @@
       width: 30%;
       padding: $default-indent;
       font-family: serif;
-      background-color: lighten(#ADD8E6, 10%);
+      background-color: lighten($primary-color, 5%);
 
       &--wide {
         width: 70%;
-        background-color: darken(#ADD8E6, 20%);
+        background-color: lighten($primary-color, 10%);
       }
     }
   }

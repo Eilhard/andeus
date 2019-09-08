@@ -4,7 +4,7 @@ Tabletop role-playing game website.
 ## Technologies used
   * Front-end
     * SCSS
-    * VueJS
+    * VueJS (Vuex)
   * Back-end
     * NodeJS
     * ExpressJS
