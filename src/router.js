@@ -1,7 +1,7 @@
 import VueRouter from 'vue-router';
 import Home from './pages/Home/Home.vue';
-import Hi from './pages/Hi.vue';
-import NotFound from './pages/NotFound.vue';
+import Bestiary from './pages/Bestiary/Bestiary.vue';
+import LostPage from './pages/LostPage.vue';
 
 export default new VueRouter({
   mode: 'history',
@@ -11,12 +11,12 @@ export default new VueRouter({
       component: Home
     },
     {
-      path: '/hi',
-      component: Hi
+      path: '/bestiary',
+      component: Bestiary
     },
     {
       path: '*',
-      component: NotFound
+      component: LostPage
     }
   ]
 })

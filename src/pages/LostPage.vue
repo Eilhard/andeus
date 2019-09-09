@@ -1,19 +1,18 @@
 <template lang="html">
   <div class="lost-page">
-    <h1>404 page</h1>
     <img class="lost-page__img" :src="lostImg"></img>
-  <div>
+  </div>
 </template>
 
 <script>
   import lostImg from '../img/lost_img.jpg';
 
   export default {
-    data() {
-      return {
-        lostImg
-      }
+  data() {
+    return {
+      lostImg
     }
+  }
   }
 </script>
 
@@ -22,6 +21,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
     background-color: #fcf0e4;
     &__img {
       width: 40vw;
