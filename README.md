@@ -8,10 +8,11 @@ Tabletop role-playing game website.
   * Back-end
     * NodeJS
     * ExpressJS
+    * MongoDB
   * Bundler
     * Webpack
 
 ## Repository contents
-  * [Server-side code](https://github.com/Eilhard/andeus/tree/master/server "Server-side").
-  * [Client-side source](https://github.com/Eilhard/andeus/tree/master/src "Client-side").
-  * [Client-side distributive](https://github.com/Eilhard/andeus/tree/master/public "Client-side").
+  * [Backend code](https://github.com/Eilhard/andeus/tree/master/backend "Server-side").
+  * [Frontend code](https://github.com/Eilhard/andeus/tree/master/frontend "Client-side").
+  * [Frontend distributive](https://github.com/Eilhard/andeus/tree/master/frontend/public "Client-side").
