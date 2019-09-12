@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import '../../plugins/fontawesome.js';
+  import '../plugins/fontawesome.js';
 
   export default {
     name: 'GlobalNav',

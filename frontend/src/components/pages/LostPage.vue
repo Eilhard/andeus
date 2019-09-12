@@ -1,11 +1,11 @@
 <template lang="html">
   <div class="lost-page">
-    <img class="lost-page__img" :src="lostImg"></img>
+    <img class="lost-page__img" :src="`/${lostImg}`"></img>
   </div>
 </template>
 
 <script>
-  import lostImg from '../img/lost_img.jpg';
+  import lostImg from '../../assets/img/lost_img.jpg';
 
   export default {
   data() {

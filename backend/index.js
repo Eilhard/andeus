@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const app = express();
-const history = require('connect-history-api-fallback');
+const mongoose = require('mongoose');
+const config = require('./api/config/config.js');
 
-const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -16,15 +17,18 @@ app.use((req, res, next) => {
   next();
 });
 
+/* DB */
+mongoose.connect(config.mongodb, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected.'))
+  .catch(error => console.log(error))
+
 /* Routes */
-let bestiary = require('./server/routes/bestiary.js');
+const bestiary = require('./api/routes/bestiary.js');
+const auth = require('./api/routes/auth.js');
 app.use('/api/bestia', bestiary);
+app.use('/api/auth', auth);
 
-app.use(history());
-app.use(express.static(path.join(__dirname, './public/')));
+let url = 'mongodb://localhost:27017/'
 
-let config = {
-    ip: '0.0.0.0',
-    port: 18000
-}
+
 app.listen(config.port, config.ip, () => { console.log(`Server initiated on ${config.ip}:${config.port}`); })

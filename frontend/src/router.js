@@ -1,7 +1,7 @@
 import VueRouter from 'vue-router';
-import Home from './pages/Home/Home.vue';
-import Bestiary from './pages/Bestiary/Bestiary.vue';
-import LostPage from './pages/LostPage.vue';
+import Home from './components/pages/Home/Home.vue';
+import Bestiary from './components/pages/Bestiary/Bestiary.vue';
+import LostPage from './components/pages/LostPage.vue';
 
 export default new VueRouter({
   mode: 'history',

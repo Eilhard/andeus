@@ -76,7 +76,7 @@ module.exports = {
   devServer: {
     inline:true,
     host: '0.0.0.0',
-    port: 18001,
+    port: 18500,
     contentBase: path.join(__dirname, 'public'),
     historyApiFallback: true // Fix problem with vue-router in spa
   },

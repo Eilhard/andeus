@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import lostImg from '../img/lost_img.jpg';
+  import lostImg from '../../assets/img/lost_img.jpg';
 
   export default {
     data() {
