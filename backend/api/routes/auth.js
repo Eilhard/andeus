@@ -3,8 +3,8 @@ const router = express.Router();
 const controller = require('../controllers/auth.js');
 
 
-router.get('/:id', controller.login);
-router.post('', controller.create);
+router.post('/login', controller.login);
+router.post('/register', controller.create);
 
 
 
