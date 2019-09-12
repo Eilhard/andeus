@@ -5,12 +5,15 @@ Tabletop role-playing game website.
   * Front-end
     * SCSS
     * VueJS (Vuex)
+    * Webpack
   * Back-end
     * NodeJS
     * ExpressJS
     * MongoDB
-  * Bundler
-    * Webpack
+
+## Notes
+ Backend config.js added to gitignore for well-known reasons.
+
 
 ## Repository contents
   * [Backend code](https://github.com/Eilhard/andeus/tree/master/backend "Server-side").

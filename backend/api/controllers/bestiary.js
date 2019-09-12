@@ -1,8 +1,5 @@
 const Bestia = require('../models/BestiaTest.js');
 
-
-
-
 module.exports.getAll = async function (req, res) {
   let bestiary = await Bestia.find();
   res.send(bestiary);
