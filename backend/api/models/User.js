@@ -23,7 +23,22 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true
+  },
+  access: {
+    isMaster: {
+      type: Boolean,
+      default: false
+    },
+    level: {
+      type: Number,
+      default: 0
+    }
+  },
+  characters: {
+    type: Array,
+    default: []
   }
+
 });
 
 module.exports = mongoose.model('testusers', userSchema);
