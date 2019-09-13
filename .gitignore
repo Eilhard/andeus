@@ -1,3 +1,4 @@
 node_modules/
 package-lock.json
 backend/api/config/config.js
+backend/api/middleware/guard.js

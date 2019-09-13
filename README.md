@@ -12,7 +12,7 @@ Tabletop role-playing game website.
     * MongoDB
 
 ## Notes
- Backend config.js added to gitignore for well-known reasons.
+ Backend files config.js and guard.js added to gitignore for well-known reasons.
 
 
 ## Repository contents
