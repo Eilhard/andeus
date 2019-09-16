@@ -36,6 +36,7 @@ module.exports.login = async function (req, res) {
     );
     let result = await User.updateOne(user, { $set: { refreshToken: refreshToken } });
     let response = {
+      message: "Your tokens successfully created",
       accessToken: accessToken,
       refreshToken: refreshToken
     };
@@ -90,8 +91,41 @@ module.exports.register = async function (req, res) {
 
 module.exports.refreshToken = async function(req, res) {
   try {
-
+    let token = req.body.refreshToken;
+    let decodedRToken = jwt.verify(token, config.jwt.refreshKey);
+    let user = await User.findOne({_id: decodedRToken.id});
+    if (token == user.refreshToken) {
+      /* Same logic in login */
+      let accessToken = jwt.sign(
+        {
+          id: user._id,
+          login: user.login,
+          isMaster: user.access.isMaster,
+          accessLevel: user.access.level
+        },
+        config.jwt.accessKey,
+        { expiresIn: config.jwt.accessLive }
+      );
+      let refreshToken = jwt.sign(
+        {
+          id: user._id,
+          login: user.login,
+        },
+        config.jwt.refreshKey,
+        { expiresIn: config.jwt.refreshLive }
+      );
+      let result = await User.updateOne(user, { $set: { refreshToken: refreshToken } });
+      let response = {
+        message: "Your tokens successfully refreshed",
+        accessToken: accessToken,
+        refreshToken: refreshToken
+      };
+      res.status(201).send(response);
+    } else {
+      res.status(400).send(`Outdated token`);
+    }
   } catch (error) {
+    res.status(400).send(`Invalid token`);
     logger.logError(error);
   }
 }
