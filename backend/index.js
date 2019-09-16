@@ -3,9 +3,11 @@ const router = express.Router();
 const app = express();
 const mongoose = require('mongoose');
 const config = require('./api/config/config.js');
+const logger = require('./logger/index.js');
 
 const path = require('path');
 const bodyParser = require('body-parser');
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -28,6 +30,8 @@ const users = require('./api/routes/users.js');
 app.use('/api/bestia', bestiary);
 app.use('/api/auth', auth);
 app.use('/api/users', users);
+
+app.use(logger.logErrorGlobal);
 
 let url = 'mongodb://localhost:27017/'
 

@@ -4,8 +4,8 @@ const controller = require('../controllers/auth.js');
 
 
 router.post('/login', controller.login);
-router.post('/register', controller.create);
-
+router.post('/register', controller.register);
+router.post('/refresh', controller.refreshToken);
 
 
 module.exports = router;
