@@ -1,0 +1,17 @@
+.global-container {
+  width: 1200px;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+
+  @include for-desktop-medium {
+    width:1140px;
+  }
+  @include for-tablet {
+    width:720px;
+  }
+  @include for-phone {
+    width:100%;
+  }
+}

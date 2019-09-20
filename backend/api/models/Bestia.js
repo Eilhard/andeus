@@ -26,8 +26,8 @@ const testSchema = new Schema({
   loot: [
     {
       title: {
-        type: Number,
-        default: 1
+        type: String,
+        default: ''
       },
       min: {
         type: Number,

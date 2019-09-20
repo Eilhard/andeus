@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="app-container__main-holder">
+  <div class="global-container p--1">
     <h1>This is Bestiary arrr!</h1>
     <!-- <cards-nav
       v-show="navButtons.bestiary"

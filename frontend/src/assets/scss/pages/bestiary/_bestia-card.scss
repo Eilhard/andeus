@@ -1,0 +1,20 @@
+
+.stat-item__col {
+  font-family: 'Oswald', sans-serif !important;
+}
+
+.beastia-card {
+  &-header {
+    font-family: 'Alice', serif !important;
+    &__title {
+      letter-spacing: 2px !important;
+      text-transform: uppercase !important;
+    }
+  }
+  &-body {
+    &__loot {
+      font-weight: 400;
+      font-family: 'Oswald', sans-serif !important;
+    }
+  }
+}

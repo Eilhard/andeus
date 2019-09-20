@@ -1,0 +1,37 @@
+.login-page {
+  @include flex-page-center;
+
+
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  width: 500px;
+  height: 300px;
+  box-sizing: border-box;
+  border-radius: $border-radius;
+  background-color: #fff;
+  overflow: hidden;
+  @include for-phone {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+
+
+.input-group {
+  width: 100%;
+  &__title--login {
+    min-width: 80px;
+  }
+
+}
+
+.input-btn--login {
+  width: 100%;
+}

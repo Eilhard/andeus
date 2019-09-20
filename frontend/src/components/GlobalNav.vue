@@ -1,6 +1,6 @@
 <template>
   <nav class="global-nav">
-    <div class="global-container">
+    <div class="global-container global-container--nav">
       <router-link
         to="/"
         exact
@@ -8,8 +8,17 @@
         class="link"
         active-class="link--pressed"
       >
-        <span class="link__title">Home</span>
+        <span class="link__title">{{home}}</span>
         <i class="fas fa-home"></i>
+      </router-link>
+      <router-link
+        to="/articles"
+        tag="button"
+        class="link"
+        active-class="link--pressed"
+      >
+        <span class="link__title">{{articles}}</span>
+        <i class="fas fa-book"></i>
       </router-link>
       <router-link
         to="/bestiary"
@@ -17,9 +26,25 @@
         class="link"
         active-class="link--pressed"
       >
-        <span class="link__title">Bestiary</span>
+        <span class="link__title">{{bestiary}}</span>
         <i class="fas fa-dragon"></i>
       </router-link>
+      <div class="spacer"></div>
+      <router-link
+        to="/login"
+        tag="button"
+        class="link"
+        active-class="link--pressed"
+      >
+        <span class="link__title">{{login}}</span>
+        <i class="fas fa-sign-in-alt"></i>
+      </router-link>
+
+      <button class="link">
+        <span class="link__title">{{logout}}</span>
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+
     </div>
   </nav>
 </template>
@@ -31,59 +56,18 @@
     name: 'GlobalNav',
     data() {
       return {
-
+        home: 'Главная',
+        bestiary: 'Бестиарий',
+        articles: 'Статьи',
+        login: 'Войти',
+        logout: 'Выйти'
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-  $default-indent: 10px;
-
-  .global-nav {
+  .global-container--nav {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 60px;
-    color: #FFFFFF;
-    background-color: #323232;
-    @media (max-width: 400px) {
-      height: 60px;
-    }
-  }
-  .link {
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    height: 100%;
-    padding: 0 20px;
-    font-family: monospace;
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
-    border: none;
-    color: #747474;
-    background-color: #323232;
-    &--pressed {
-      color: #FFFFFF;
-    }
-    &:hover {
-      color: #FFFFFF;
-      background-color: darken(#323232, 5%);
-      cursor: pointer;
-    }
-    @media (max-width: 400px) {
-      // height: 40px;
-    }
-    &__title {
-      @media (max-width: 400px) {
-        display: none;
-      }
-    }
   }
 </style>

@@ -1,0 +1,28 @@
+
+@mixin for-desktop-medium {
+  @media (max-width: 1200px) { @content; }
+}
+@mixin for-tablet {
+  @media (max-width: 900px) { @content; }
+}
+@mixin for-phone {
+  @media (max-width: 600px) { @content; }
+}
+
+@mixin flex-page-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - #{$height-nav});
+  @include for-phone {
+    justify-content: flex-start;
+  }
+}
+
+@mixin btn-hover ($color) {
+  &:hover {
+    background-color: shade($color, 10%);
+    cursor: $cursor-hover;
+  }
+}

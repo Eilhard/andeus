@@ -1,54 +1,28 @@
-@import './reset.css';
-@import './variables.scss';
+/* Functions used in variables */
+@import './abstracts/functions.scss';
+@import './abstracts/variables.scss';
+@import './abstracts/mixins.scss';
 
-@import url('https://fonts.googleapis.com/css?family=Alice|Marck+Script|Oswald:300,400,600&display=swap');
 
+@import './base/reset.scss';
+@import './base/fonts.scss';
+
+@import './components/global-nav.scss';
+@import './components/global-container.scss';
+@import './components/spacing.scss';
+@import './components/input.scss';
+
+@import './pages/login-page.scss';
+@import './pages/bestiary/bestia-card.scss';
+
+/* This container for root div in index.html */
 .root-container {
   min-height: 100vh;
+}
+/* This container for root div in Application.vue */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background-color: $bg-page;
-}
-
-// font-family: 'Marck Script', cursive;
-// font-family: 'Alice', serif;
-// font-family: 'Oswald', sans-serif;
-
-.stat-item__col {
-  font-family: 'Oswald', sans-serif !important;
-}
-
-.beastia-card {
-  &-header {
-    font-family: 'Alice', serif !important;
-    &__title {
-      letter-spacing: 2px !important;
-      text-transform: uppercase !important;
-    }
-  }
-  &-body {
-    &__loot {
-      font-weight: 400;
-      font-family: 'Oswald', sans-serif !important;
-    }
-  }
-}
-
-.global-container {
-  width: 1200px;
-  height: 100%;
-  margin-left: auto;
-  margin-right: auto;
-
-  @media (max-width:1200px){
-    width:1140px;
-  }
-  @media (max-width:768px){
-    width:720px;
-  }
-  @media (max-width:576px){
-    width: 100%;
-  }
-
-
-
-
 }
