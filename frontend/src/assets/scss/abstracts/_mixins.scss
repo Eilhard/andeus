@@ -20,9 +20,16 @@
   }
 }
 
-@mixin btn-hover ($color) {
+@mixin btn-hover-shade ($color) {
   &:hover {
     background-color: shade($color, 10%);
+    cursor: $cursor-hover;
+  }
+}
+
+@mixin btn-hover-tint ($color) {
+  &:hover {
+    background-color: tint($color, 50%);
     cursor: $cursor-hover;
   }
 }

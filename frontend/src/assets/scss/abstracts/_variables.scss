@@ -6,8 +6,12 @@ $border-radius: 4px;
 // $bg-input: #64FFDA;
 // $bg-input: #B39DDB;
 $input-padding: 7px;
+$tabs-padding: 15px;
 
 $color-secondary: #B39DDB;
+
+$color-success: green;
+$color-error: red;
 
 /* Colors */
 
@@ -15,7 +19,7 @@ $bg-input: $color-secondary;
 
 /* Sizes */
 $height-nav: 60px;
-
+$height-tabs: 35px;
 
 /* Other */
 $cursor-hover: pointer;

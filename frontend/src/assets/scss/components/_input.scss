@@ -31,5 +31,5 @@
   border-radius: $border-radius;
   background-color: $bg-input;
   box-sizing: border-box;
-  @include btn-hover($bg-input);
+  @include btn-hover-shade($bg-input);
 }

@@ -43,7 +43,7 @@ module.exports.login = async function (req, res) {
     res.status(201).send(response);
   } catch (error) {
     logger.logError(error);
-    res.status(500).send("Can't login. Try again later.");
+    res.status(500).send("Can't log in. Try again later.");
   }
 }
 

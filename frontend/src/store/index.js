@@ -30,21 +30,15 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    login: async function(context, payload) {
-      let response = await axios.post('auth/login', {
-        login: payload.login,
-        password: payload.password
-      });
-      let accessToken = response.data.accessToken;
-      let refreshToken = response.data.refreshToken;
-      context.commit('setAccessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-      let decodedToken = jwt.decode(accessToken);
+    handleTokens(context, payload) {
+      context.commit('setAccessToken', payload.accessToken);
+      localStorage.setItem('refreshToken', payload.refreshToken);
+      let decodedToken = jwt.decode(payload.accessToken);
       console.log(decodedToken);
       context.commit('setAccessExpiration', decodedToken.exp);
     },
     refresh: async function(context, payload) {
       console.log(accessTimeLeft);
-    }
+    },
   }
 });

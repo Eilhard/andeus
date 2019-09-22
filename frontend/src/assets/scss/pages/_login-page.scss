@@ -1,7 +1,17 @@
 .login-page {
   @include flex-page-center;
+}
 
-
+.login-status {
+  padding-top: 5px;
+  font-size: 10px;
+  font-style: italic;
+  &--success {
+    color: $color-success;
+  }
+  &--error {
+    color: $color-error;
+  }
 }
 
 .login-form {
@@ -11,7 +21,6 @@
   justify-content: center;
   padding: 30px;
   width: 500px;
-  height: 300px;
   box-sizing: border-box;
   border-radius: $border-radius;
   background-color: #fff;
@@ -21,8 +30,6 @@
     padding: 10px;
   }
 }
-
-
 
 .input-group {
   width: 100%;
