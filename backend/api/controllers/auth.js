@@ -48,8 +48,10 @@ module.exports.login = async function (req, res) {
 }
 
 module.exports.register = async function (req, res) {
-  let user = await User.findOne({email: req.body.email});
-  if (user) {
+  let user, email, login;
+  email = await User.findOne({email: req.body.email});
+  login = await User.findOne({login: req.body.login});
+  if (email || login) {
     res.status(409).send("User already exist");
     return
   }

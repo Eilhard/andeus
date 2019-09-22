@@ -13,10 +13,14 @@ export default new Vuex.Store({
     bestiary
   },
   state: {
+    auth: false,
     accessToken: '',
     accessExpiration: 0
   },
   mutations: {
+    setAuth(state, payload) {
+      state.auth = payload;
+    },
     setAccessToken(state, payload) {
       state.accessToken = payload;
     },
@@ -40,5 +44,11 @@ export default new Vuex.Store({
     refresh: async function(context, payload) {
       console.log(accessTimeLeft);
     },
+    logout(context) {
+      context.commit('setAuth', false);
+      context.commit('setAccessToken', '');
+      context.commit('setAccessExpiration', 0);
+      localStorage.removeItem('refreshToken');
+    }
   }
 });

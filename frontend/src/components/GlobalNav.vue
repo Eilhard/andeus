@@ -8,7 +8,7 @@
         class="link"
         active-class="link--pressed"
       >
-        <span class="link__title">{{home}}</span>
+        <span class="link__title">{{links.home}}</span>
         <i class="fas fa-home"></i>
       </router-link>
       <router-link
@@ -17,7 +17,7 @@
         class="link"
         active-class="link--pressed"
       >
-        <span class="link__title">{{articles}}</span>
+        <span class="link__title">{{links.articles}}</span>
         <i class="fas fa-book"></i>
       </router-link>
       <router-link
@@ -26,22 +26,36 @@
         class="link"
         active-class="link--pressed"
       >
-        <span class="link__title">{{bestiary}}</span>
+        <span class="link__title">{{links.bestiary}}</span>
         <i class="fas fa-dragon"></i>
       </router-link>
       <div class="spacer"></div>
+
       <router-link
+        v-show="!auth"
         to="/login"
         tag="button"
         class="link"
         active-class="link--pressed"
       >
-        <span class="link__title">{{login}}</span>
+        <span class="link__title">{{links.login}}</span>
         <i class="fas fa-sign-in-alt"></i>
       </router-link>
-
-      <button class="link">
-        <span class="link__title">{{logout}}</span>
+      <router-link
+        v-show="auth"
+        to="/user"
+        tag="button"
+        class="link link--large"
+        active-class="link--pressed"
+      >
+        <i class="fas fa-user-circle"></i>
+      </router-link>
+      <button
+        v-on:click="logout"
+        v-show="auth"
+        class="link"
+      >
+        <span class="link__title">{{links.logout}}</span>
         <i class="fas fa-sign-out-alt"></i>
       </button>
 
@@ -56,12 +70,24 @@
     name: 'GlobalNav',
     data() {
       return {
-        home: 'Главная',
-        bestiary: 'Бестиарий',
-        articles: 'Статьи',
-        login: 'Войти',
-        logout: 'Выйти'
+        links: {
+          home: 'Главная',
+          bestiary: 'Бестиарий',
+          articles: 'Статьи',
+          login: 'Войти',
+          logout: 'Выйти'
+        }
       }
+    },
+    computed: {
+      auth() {
+        return this.$store.state.auth;
+      }
+    },
+    methods: {
+      logout() {
+        this.$store.dispatch('logout');
+      },
     }
   }
 </script>

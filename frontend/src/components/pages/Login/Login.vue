@@ -184,8 +184,8 @@
           refreshToken: response.data.refreshToken
         });
         if (response.status == 201) {
-          /* Disable login route and push */
-        
+          this.$store.commit('setAuth', true);
+          this.$router.push('/');
         }
       },
       register: async function() {
@@ -227,6 +227,10 @@
           this.status.message = "Пользователь успешно создан.";
           this.status.type = 'success';
           this.status.isShown = true;
+          this.inputs.forEach(item => {
+            if (item.id == 'login') item.state = login;
+            if (item.id == 'password') item.state = password;
+          });
         }
       },
       switchTabs(currentTab) {
