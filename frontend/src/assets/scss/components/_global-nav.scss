@@ -5,13 +5,12 @@ $default-indent: 10px;
   justify-content: center;
   align-items: center;
   align-content: center;
-  flex-wrap: wrap;
   width: 100%;
   height: $height-nav;
   color: #FFFFFF;
   background-color: #323232;
-  @media (max-width: 400px) {
-    height: 60px;
+  @include for-phone {
+    height: auto;
   }
 }
 .link {
@@ -36,17 +35,81 @@ $default-indent: 10px;
   &--large {
     font-size: 30px;
   }
+  &--phone-width {
+    @include for-phone {
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+    }
+  }
   &:hover {
     color: #FFFFFF;
     background-color: darken(#323232, 5%);
     cursor: $cursor-hover;
   }
-  @media (max-width: 400px) {
-    // height: 40px;
+  @include for-phone {
+    height: $height-nav;
   }
   &__title {
     @include for-phone {
       display: none;
     }
+  }
+}
+
+
+.primary-nav-section {
+  display: inline-flex;
+  @include for-phone {
+    justify-content: space-between;
+  }
+  &--mobile{
+    display: none;
+    @include for-phone {
+      display: inline-flex;
+    }
+  }
+}
+
+.secondary-nav-section {
+  display: inline-flex;
+  flex-grow: 1;
+  @include for-phone {
+    flex-grow: 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  &--hide-phone {
+    @include for-phone {
+      display: none;
+    }
+  }
+}
+
+
+
+
+
+
+
+.toggle-links {
+  display: flex;
+  flex-grow: 1;
+  @include for-phone {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &-controller {
+
+  }
+}
+
+.global-container--nav {
+  display: flex;
+  @include for-phone {
+    flex-direction: column;
+
+    height: auto;
   }
 }

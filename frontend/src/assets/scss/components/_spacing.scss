@@ -1,5 +1,10 @@
 .spacer {
   flex-grow: 1;
+  &-exclude-phone {
+    @include for-phone {
+      display: none;
+    }
+  }
 }
 
 .p {
