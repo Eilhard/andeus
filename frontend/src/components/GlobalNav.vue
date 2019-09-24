@@ -3,13 +3,14 @@
     <div class="global-container global-container--nav">
       <div class="primary-nav-section">
         <router-link
+          v-on:click.native="linkClick"
           to="/"
           exact
           tag="button"
           class="link"
           active-class="link--pressed"
         >
-          <span class="link__title">{{links.home}}</span>
+          <span class="link__title--hide-phone">{{links.home}}</span>
           <i class="fas fa-home"></i>
         </router-link>
 
@@ -36,6 +37,7 @@
         v-bind:class="{ 'secondary-nav-section--hide-phone': !isNavOpen  }"
       >
         <router-link
+          v-on:click.native="linkClick"
           to="/articles"
           tag="button"
           class="link link--phone-width"
@@ -45,6 +47,7 @@
           <i class="fas fa-book"></i>
         </router-link>
         <router-link
+          v-on:click.native="linkClick"
           to="/bestiary"
           tag="button"
           class="link link--phone-width"
@@ -57,6 +60,7 @@
         <div class="spacer spacer-exclude-phone"></div>
 
         <router-link
+          v-on:click.native="linkClick"
           v-show="!auth"
           to="/login"
           tag="button"
@@ -67,12 +71,14 @@
           <i class="fas fa-sign-in-alt"></i>
         </router-link>
         <router-link
+          v-on:click.native="linkClick"
           v-show="auth"
           to="/user"
           tag="button"
-          class="link link--large link--phone-width"
+          class="link link--large-exclude-phone link--phone-width"
           active-class="link--pressed"
         >
+          <span class="link__title link__title--show-phone">{{links.user}}</span>
           <i class="fas fa-user-circle"></i>
         </router-link>
         <button
@@ -99,10 +105,11 @@
           home: 'Главная',
           bestiary: 'Бестиарий',
           articles: 'Статьи',
+          user: 'Личный кабинет',
           login: 'Войти',
           logout: 'Выйти'
         },
-        isNavOpen: false
+        isNavOpen: true
       }
     },
     computed: {
@@ -111,7 +118,11 @@
       }
     },
     methods: {
+      linkClick() {
+        this.isNavOpen = false;
+      },
       logout() {
+        this.linkClick();
         this.$store.dispatch('logout');
       },
       showNav() {

@@ -22,23 +22,38 @@ $default-indent: 10px;
   height: 100%;
   padding: 0 20px;
   font-family: monospace;
-  font-size: 16px;
+  font-size: $fsize-icons;
   font-weight: bold;
   text-transform: uppercase;
   border: none;
   color: #747474;
   // color: shade(#B39DDB, 20%);
   background-color: #323232;
+  @include for-phone {
+    height: $height-nav;
+  }
   &--pressed {
     color: #FFFFFF;
   }
   &--large {
-    font-size: 30px;
+    font-size: $fsize-icons*2;
+    &-exclude-phone {
+      font-size: $fsize-icons*2;
+      @include for-phone {
+        font-size: $fsize-icons;
+      }
+    }
+    &-phone {
+      @include for-phone {
+        font-size: $fsize-icons*2;
+      }
+    }
   }
   &--phone-width {
     @include for-phone {
-      justify-content: center;
-      align-items: flex-start;
+      justify-content: flex-end;
+      align-items: center;
+      flex-direction: row-reverse;
       width: 100%;
     }
   }
@@ -47,12 +62,21 @@ $default-indent: 10px;
     background-color: darken(#323232, 5%);
     cursor: $cursor-hover;
   }
-  @include for-phone {
-    height: $height-nav;
-  }
   &__title {
+    display: inline-flex;
     @include for-phone {
+      padding: 0 $input-padding;
+    }
+    &--hide-phone {
+      @include for-phone {
+        display: none;
+      }
+    }
+    &--show-phone {
       display: none;
+      @include for-phone {
+        display: inline-flex;
+      }
     }
   }
 }
