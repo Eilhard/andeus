@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="global-container p--1">
     <h1>Home page</h1>
+    
   </div>
 </template>
 
@@ -8,6 +9,9 @@
 
   export default {
     computed: {
+
+    },
+    methods: {
 
     }
   }

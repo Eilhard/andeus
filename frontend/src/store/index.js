@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import user from './modules/user.js';
 import article from './modules/article.js';
 import bestiary from './modules/bestiary.js';
 import jwt from 'jsonwebtoken';
@@ -29,20 +30,45 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    accessTimeLeft(state) {
-      return Date.now() - state.accessExpiration;
-    }
+
   },
   actions: {
     handleTokens(context, payload) {
       context.commit('setAccessToken', payload.accessToken);
       localStorage.setItem('refreshToken', payload.refreshToken);
       let decodedToken = jwt.decode(payload.accessToken);
-      console.log(decodedToken);
       context.commit('setAccessExpiration', decodedToken.exp);
     },
+    checkAccessToken(context) {
+      let exp = context.state.accessExpiration - Date.now() / 1000;
+      if (exp > 10) return;
+      context.dispatch('refresh');
+    },
     refresh: async function(context, payload) {
-      console.log(accessTimeLeft);
+      let refreshToken = localStorage.getItem('refreshToken');
+      if (!refreshToken) {
+        context.dispatch('logout');
+        return;
+      }
+      try {
+        let response = await axios.post('/auth/refresh', {
+          refreshToken: refreshToken
+        });
+        context.dispatch('handleTokens', {
+          accessToken: response.data.accessToken,
+          refreshToken: response.data.refreshToken
+        });
+        context.dispatch('checkAuth');
+      } catch (err) {
+        if (err.response.status == 400) {
+          context.dispatch('logout');
+        }
+      }
+    },
+    checkAuth(context) {
+      if (context.state.accessToken) {
+        context.commit('setAuth', true);
+      }
     },
     logout(context) {
       context.commit('setAuth', false);

@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const testSchema = new Schema({
-  id: 1,
+const bestiaSchema = new Schema({
   name: {
     type: String,
     required
@@ -45,4 +44,4 @@ const testSchema = new Schema({
   ]
 })
 
-module.exports = mongoose.model('test', testSchema);
+module.exports = mongoose.model('bestia', bestiaSchema);

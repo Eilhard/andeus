@@ -184,7 +184,7 @@
           refreshToken: response.data.refreshToken
         });
         if (response.status == 201) {
-          this.$store.commit('setAuth', true);
+          this.$store.dispatch('checkAuth');
           this.$router.push('/');
         }
       },

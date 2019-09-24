@@ -34,10 +34,12 @@ const userSchema = new Schema({
       default: 0
     }
   },
-  characters: {
-    type: Array,
-    default: []
-  },
+  characters: [
+    {
+      ref: 'characters',
+      type: Schema.Types.ObjectId
+    }
+  ],
   refreshToken: {
     type: String
   }
