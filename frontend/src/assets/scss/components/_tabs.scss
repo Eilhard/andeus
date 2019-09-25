@@ -3,6 +3,9 @@
   flex-wrap: nowrap;
   width: 100%;
   box-sizing: border-box;
+  &--dark {
+    background-color: $bg-tabs;
+  }
   &__tab {
     display: flex;
     flex-grow: 1;
@@ -21,6 +24,10 @@
     text-transform: uppercase;
     box-sizing: border-box;
     @include btn-hover-tint($bg-input);
+    &--dark {
+      color: tint($bg-input, 65%);
+      @include btn-hover-shade($bg-input);
+    }
     &--active {
       border-bottom: 2px solid $bg-input;
     }

@@ -3,6 +3,7 @@ import Home from './components/pages/Home/Home.vue';
 import Articles from './components/pages/Articles/Articles.vue';
 import Database from './components/pages/Database/Database.vue';
 import Bestiary from './components/pages/Bestiary/Bestiary.vue';
+import Items from './components/pages/Items/Items.vue';
 import User from './components/pages/User/User.vue';
 import Login from './components/pages/Login/Login.vue';
 import LostPage from './components/pages/LostPage.vue';
@@ -33,6 +34,10 @@ export default new VueRouter({
         {
           path: '',
           component: Bestiary
+        },
+        {
+          path: 'items',
+          component: Items
         }
       ]
     },

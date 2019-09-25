@@ -1,4 +1,6 @@
 
 .sheet {
+  border-radius: $border-radius;
   background-color: $bg-sheet;
+  overflow: hidden;
 }
