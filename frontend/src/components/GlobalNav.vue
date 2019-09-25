@@ -44,17 +44,17 @@
           active-class="link--pressed"
         >
           <span class="link__title">{{links.articles}}</span>
-          <i class="fas fa-book"></i>
+          <i class="fas fa-newspaper"></i>
         </router-link>
         <router-link
           v-on:click.native="linkClick"
-          to="/bestiary"
+          to="/database"
           tag="button"
           class="link link--phone-width"
           active-class="link--pressed"
         >
-          <span class="link__title">{{links.bestiary}}</span>
-          <i class="fas fa-dragon"></i>
+          <span class="link__title">{{links.database}}</span>
+          <i class="fas fa-book"></i>
         </router-link>
 
         <div class="spacer spacer-exclude-phone"></div>
@@ -103,7 +103,7 @@
       return {
         links: {
           home: 'Главная',
-          bestiary: 'Бестиарий',
+          database: 'Библиотека',
           articles: 'Статьи',
           user: 'Личный кабинет',
           login: 'Войти',

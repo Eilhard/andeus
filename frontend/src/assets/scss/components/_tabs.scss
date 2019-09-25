@@ -9,8 +9,8 @@
     flex-shrink: 1;
     justify-content: center;
     align-items: center;
-    height: $height-tabs;
-    padding: 0 $tabs-padding;
+    min-height: $height-tabs;
+    padding: 0 $padding-tabs;
     font-size: $fsize-input;
     font-weight: 600;
     color: shade($bg-input, 65%);
@@ -24,6 +24,30 @@
     &--active {
       border-bottom: 2px solid $bg-input;
     }
-  }
+    &--page {
+       flex-grow: 0;
+       @include for-tablet {
+         flex-grow: 1;
+       }
+       @include for-phone {
+         flex-grow: 1;
+       }
+    }
+    &-group {
+      display: flex;
+      flex-direction: column;
+      padding: $padding-tabs-icon $padding-tabs;
+      &-title {
+        @include for-phone {
+          display: none;
+        }
+      }
+      &-icon {
+        @include for-phone {
 
+        }
+      }
+
+    }
+  }
 }

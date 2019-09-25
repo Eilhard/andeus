@@ -3,7 +3,6 @@
 @import './abstracts/variables.scss';
 @import './abstracts/mixins.scss';
 
-
 @import './base/reset.scss';
 @import './base/fonts.scss';
 
@@ -12,6 +11,7 @@
 @import './components/spacing.scss';
 @import './components/input.scss';
 @import './components/tabs.scss';
+@import './components/sheet.scss';
 
 @import './pages/login-page.scss';
 @import './pages/user-page.scss';

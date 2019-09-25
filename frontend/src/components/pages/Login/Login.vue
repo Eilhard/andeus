@@ -90,7 +90,7 @@
             model: 'register',
             id: 'email',
             title: "Email",
-            type: "text",
+            type: "email",
             isShown: false,
             state: 'terry@gmail.com'
           },
@@ -106,7 +106,7 @@
             model: 'all',
             id: 'password',
             title: "Пароль",
-            type: "text",
+            type: "password",
             isShown: true,
             state: "12345"
           },

@@ -70,8 +70,10 @@ export default new Vuex.Store({
       }
     },
     checkAuth(context) {
-      if (context.state.accessToken) {
+      let exp = context.state.accessExpiration - Date.now() / 1000;
+      if (context.state.accessToken && exp > 10) {
         context.commit('setAuth', true);
+        context.dispatch('user/getUser');
       }
     },
     logout(context) {

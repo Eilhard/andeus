@@ -1,6 +1,7 @@
 import VueRouter from 'vue-router';
 import Home from './components/pages/Home/Home.vue';
 import Articles from './components/pages/Articles/Articles.vue';
+import Database from './components/pages/Database/Database.vue';
 import Bestiary from './components/pages/Bestiary/Bestiary.vue';
 import User from './components/pages/User/User.vue';
 import Login from './components/pages/Login/Login.vue';
@@ -19,8 +20,21 @@ export default new VueRouter({
       component: Articles
     },
     {
-      path: '/bestiary',
-      component: Bestiary
+      path: '/database',
+      component: Database,
+      beforeEnter: function(to, from, next) {
+        if (store.state.auth) {
+          next();
+        }else{
+          next('/');
+        }
+      },
+      children: [
+        {
+          path: '',
+          component: Bestiary
+        }
+      ]
     },
     {
       path: '/user',

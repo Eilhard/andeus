@@ -211,7 +211,6 @@
         let response;
         try {
           response = await axios.post(`/character`, {
-              user: this.$store.state.user.id,
               nickname: nickname,
               name: {
                 firstname: firstname,

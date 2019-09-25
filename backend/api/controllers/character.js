@@ -3,7 +3,7 @@ const logger = require('../../logger/index.js');
 
 module.exports.getAll = async function (req, res) {
   try {
-    let character = await Character.find({});
+    let character = await Character.find({user: req.user.id});
     res.send(character);
   } catch (error) {
     logger.logError(error);
@@ -13,8 +13,8 @@ module.exports.getAll = async function (req, res) {
 
 module.exports.getById = async function (req, res) {
     try {
-      let character = await Character.findOne({_id: req.body.id});
-      res.status(200).send(character);
+      let character = await Character.findOne({_id: req.params.id});
+      res.send(character);
     } catch (error) {
       logger.logError(error);
       res.status(500).send("Can't get data. Try again later.");
@@ -28,6 +28,7 @@ module.exports.create = async function (req, res) {
   if (req.body.experience) experience = req.body.experience;
   try {
     let character = await new Character({
+      user: req.user.id,
       nickname: req.body.nickname || req.body.name.firstname || "Unknown",
       name: {
         firstname: req.body.name.firstname || "Unknown",
@@ -45,8 +46,20 @@ module.exports.create = async function (req, res) {
       money: money,
       experience: experience
     }).save();
-    console.log(character);
     res.send(character);
+  } catch (error) {
+    logger.logError(error);
+    res.status(500).send("Can't create character. Try again later.");
+  }
+}
+
+module.exports.update = async function (req, res) {
+
+}
+module.exports.delete = async function (req, res) {
+  try {
+    await Character.remove({_id: req.params.id});
+    res.status(200).send({ id: req.params.id, message: "Character was successfully deleted" });
   } catch (error) {
     logger.logError(error);
     res.status(500).send("Can't create character. Try again later.");
