@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="global-container login-page p--2">
 
-    <form v-on:submit.prevent class="login-form">
+    <form v-on:submit.prevent class="input-container">
       <div class="tabs-menu">
         <button
           v-for="tab in tabs"
@@ -31,7 +31,7 @@
         <span class="input-group__title input-group__title--login">{{item.title}}</span>
         <input
           class="input-group__text-input"
-          type="text"
+          v-bind:type="item.type"
           v-model="item.state"
         >
       </label>
@@ -40,7 +40,7 @@
         v-for="btn in submit"
         v-show="btn.isShown"
         v-on:click="btn.action"
-        class="input-btn input-btn--login m--1 "
+        class="input-btn input-btn--block m--1 "
       >
         {{btn.title}}
       </button>
@@ -74,6 +74,7 @@
             model: 'register',
             id: 'firstname',
             title: "Имя",
+            type: "text",
             isShown: false,
             state: 'Terry'
           },
@@ -81,6 +82,7 @@
             model: 'register',
             id: 'lastname',
             title: "Фамилия",
+            type: "text",
             isShown: false,
             state: 'Scarry'
           },
@@ -88,6 +90,7 @@
             model: 'register',
             id: 'email',
             title: "Email",
+            type: "text",
             isShown: false,
             state: 'terry@gmail.com'
           },
@@ -95,6 +98,7 @@
             model: 'all',
             id: 'login',
             title: "Логин",
+            type: "text",
             isShown: true,
             state: "Terry"
           },
@@ -102,6 +106,7 @@
             model: 'all',
             id: 'password',
             title: "Пароль",
+            type: "text",
             isShown: true,
             state: "12345"
           },

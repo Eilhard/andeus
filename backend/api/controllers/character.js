@@ -27,7 +27,7 @@ module.exports.create = async function (req, res) {
   let experience = [];
   if (req.body.experience) experience = req.body.experience;
   try {
-    let character = new Character({
+    let character = await new Character({
       nickname: req.body.nickname || req.body.name.firstname || "Unknown",
       name: {
         firstname: req.body.name.firstname || "Unknown",
@@ -45,6 +45,7 @@ module.exports.create = async function (req, res) {
       money: money,
       experience: experience
     }).save();
+    console.log(character);
     res.send(character);
   } catch (error) {
     logger.logError(error);

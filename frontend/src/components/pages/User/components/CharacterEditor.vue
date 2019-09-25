@@ -1,109 +1,240 @@
 <template lang="html">
-  <form v-on:submit.prevent class="character-form">
-    <div
-      v-show="status.isShown"
-      class="login-status"
-      v-bind:class="{
-        'login-status--success': (status.type == 'success') ? true : false,
-        'login-status--error': (status.type == 'error') ? true : false
-      }"
-    >{{status.message}}</div>
+  <div class="global-container login-page p--2">
 
-    <label
-      v-for="item in inputs"
-      class="input-group m--1"
-    >
-      <span class="input-group__title input-group__title--login">{{item.title}}</span>
-      <input
-        class="input-group__text-input"
-        type="text"
-        v-model="item.state"
+    <form v-on:submit.prevent class="input-container">
+      <div class="tabs-menu">
+        <button
+          v-for="tab in tabs"
+          v-bind:key="`character-tab_${tab.title}`"
+          v-on:click="tab.action(tab)"
+          class="tabs-menu__tab"
+          v-bind:class="{ 'tabs-menu__tab--active': tab.isPressed }"
+        >
+          {{tab.title}}
+        </button>
+      </div>
+
+      <div
+        v-show="status.isShown"
+        class="login-status"
+        v-bind:class="{
+          'login-status--success': (status.type == 'success') ? true : false,
+          'login-status--error': (status.type == 'error') ? true : false
+        }"
+      >{{status.message}}</div>
+
+      <label
+        v-for="item in inputs"
+        v-show="item.isShown"
+        class="input-group m--1"
       >
-    </label>
+        <span class="input-group__title input-group__title--character">{{item.title}}</span>
+        <input
+          class="input-group__text-input"
+          v-bind:type="item.type"
+          v-model="item.state"
+        >
+      </label>
 
-    <button
-      v-for="btn in submit"
-      v-on:click="btn.action"
-      class="input-btn input-btn--login m--1 "
-    >
-      {{btn.title}}
-    </button>
-  </form>
+      <button
+        v-for="btn in submit"
+        v-show="btn.isShown"
+        v-on:click="btn.action"
+        class="input-btn input-btn--block m--1 "
+      >
+        {{btn.title}}
+      </button>
+    </form>
+  </div>
 </template>
 
 <script>
-  import axios from '../../../plugins/axios.js';
+  import axios from '../../../../plugins/axios.js';
 
   export default {
     data() {
       return {
+        mode: 'personal',
+        tabs: [
+          {
+            model: 'personal',
+            title: "Профиль",
+            isPressed: true,
+            action: this.switchTabs
+          },
+          {
+            model: 'attributes',
+            title: "Атрибуты",
+            isPressed: false,
+            action: this.switchTabs
+          }
+        ],
         inputs: [
           {
+            model: 'personal',
+            id: 'nickname',
+            title: "Прозвище",
+            type: "text",
+            isShown: true,
+            state: 'Сонный Тэд'
+          },
+          {
+            model: 'personal',
             id: 'firstname',
             title: "Имя",
-            state: 'Terry'
+            type: "text",
+            isShown: true,
+            state: 'Тэд'
           },
           {
+            model: 'personal',
             id: 'lastname',
             title: "Фамилия",
-            state: 'Scarry'
+            type: "text",
+            isShown: true,
+            state: 'Гримм'
           },
           {
-            id: 'email',
-            title: "Email",
-            state: 'terry@gmail.com'
+            model: 'personal',
+            id: 'gender',
+            title: "Пол",
+            type: "text",
+            isShown: true,
+            state: "мужской"
           },
           {
-            id: 'login',
-            title: "Логин",
-            state: "Terry"
+            model: 'personal',
+            id: 'age',
+            title: "Возраст",
+            type: "number",
+            isShown: true,
+            state: "45"
           },
           {
-            id: 'password',
-            title: "Пароль",
-            state: "12345"
+            model: 'attributes',
+            id: 'strength',
+            title: "Сила",
+            type: "number",
+            isShown: false,
+            state: 12
+          },
+          {
+            model: 'attributes',
+            id: 'agility',
+            title: "Проворство",
+            type: "number",
+            isShown: false,
+            state: 16
+          },
+          {
+            model: 'attributes',
+            id: 'dexterity',
+            title: "Ловкость",
+            type: "number",
+            isShown: false,
+            state: 16
+          },
+          {
+            model: 'attributes',
+            id: 'intelligence',
+            title: "Интеллект",
+            type: "number",
+            isShown: false,
+            state: 10
+          },
+          {
+            model: 'attributes',
+            id: 'vitality',
+            title: "Выносливость",
+            type: "number",
+            isShown: false,
+            state: 8
           },
         ],
         submit: [
           {
-            title: "Создать нового персонажа",
-            action: this.create
+            model: 'all',
+            title: "Создать персонажа",
+            isShown: true,
+            action: this.createCharacter
           },
         ],
         status: {
           type: "",
-          isShown: true,
+          isShown: false,
           message: ""
         }
       }
     },
-    methods: {
-      create: async function() {
-        let firstname, lastname, login, password, email;
-        this.inputs.forEach(item => {
-          if (item.id == 'firstname') firstname = item.state;
-          if (item.id == 'lastname') lastname = item.state;
-          if (item.id == 'email') email = item.state;
-          if (item.id == 'login') login = item.state;
-          if (item.id == 'password') password = item.state;
+    watch: {
+      mode() {
+        this.tabs.forEach(item => {
+          if (this.mode == item.model) {
+            item.isPressed = true
+          } else {
+            item.isPressed = false
+          }
         });
-        let response;
-        try {
-          response = await axios.post('auth/register', {
-            name: {
-              firstname: firstname,
-              lastname: lastname,
-            },
-            email: email,
-            login: login,
-            password: password
-          });
-        } catch(err) {
-          if (err.response.status == 409) {
-            this.status.message = "Пользователь с таким логином или почтой уже зарегистрирован.";
+        this.inputs.forEach(item => {
+          if (this.mode == item.model) {
+            item.isShown = true
+          } else {
+            item.isShown = false
+          }
+        });
+      }
+    },
+    methods: {
+      createCharacter: async function() {
+        this.status.isShown = false;
+        let nickname, firstname, lastname, gender, age, strength, agility, dexterity, intelligence, vitality;
+        let allFiled = true;
+        this.inputs.forEach(item => {
+          if (!item.state) {
+            this.status.message = `Поле ${item.title} не заполнено.`;
             this.status.type = 'error';
             this.status.isShown = true;
+            return;
           }
+          if (item.id == 'nickname') nickname = item.state;
+          if (item.id == 'firstname') firstname = item.state;
+          if (item.id == 'lastname') lastname = item.state;
+          if (item.id == 'gender') gender = item.state;
+          if (item.id == 'age') age = item.state;
+          if (item.id == 'strength') strength = item.state;
+          if (item.id == 'agility') agility = item.state;
+          if (item.id == 'dexterity') dexterity = item.state;
+          if (item.id == 'intelligence') intelligence = item.state;
+          if (item.id == 'vitality') vitality = item.state;
+        });
+        if (!allFiled) return;
+        let response;
+        try {
+          response = await axios.post(`/character`, {
+              user: this.$store.state.user.id,
+              nickname: nickname,
+              name: {
+                firstname: firstname,
+                lastname: lastname,
+              },
+              gender: gender,
+              age: age,
+              attributes: {
+                strength: strength,
+                agility: agility,
+                dexterity: dexterity,
+                intelligence: intelligence,
+                vitality: vitality
+              },
+              money: [],
+              experience: []
+            },
+            {
+              headers: { Authorization: `Bearer ${this.$store.state.accessToken}`
+            }
+          });
+          console.log(response);
+        } catch(err) {
           if (err.response.status == 500) {
             this.status.message = "Сервер не отвечает попробуйте позже.";
             this.status.type = 'error';
@@ -112,13 +243,10 @@
           console.log(`${err.response.status} ${err.response.statusText}: ${err.response.data}`);
           return
         }
-        if (response.status == 201) {
-
-          this.status.message = "Пользователь успешно создан.";
-          this.status.type = 'success';
-          this.status.isShown = true;
-
-        }
+      },
+      switchTabs(currentTab) {
+        this.status.isShown = false;
+        this.mode = currentTab.model;
       }
     }
   }

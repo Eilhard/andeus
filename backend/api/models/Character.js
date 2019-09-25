@@ -5,7 +5,6 @@ const charactersSchema = new Schema({
   user: {
     ref: 'users',
     type: Schema.Types.ObjectId,
-    required: true
   },
   nickname: {
     type: String,

@@ -1,5 +1,6 @@
 .input-group {
   display: flex;
+  width: 100%;
   border: 1px solid shade($bg-input, 20%);
   border-radius: $border-radius;
   overflow: hidden;
@@ -32,4 +33,25 @@
   background-color: $bg-input;
   box-sizing: border-box;
   @include btn-hover-shade($bg-input);
+
+  &--block {
+    width: 100%;
+  }
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  width: 500px;
+  box-sizing: border-box;
+  border-radius: $border-radius;
+  background-color: #fff;
+  overflow: hidden;
+  @include for-phone {
+    width: 100%;
+    padding: 10px;
+  }
 }

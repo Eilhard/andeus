@@ -1,0 +1,9 @@
+.input-group {
+  &__title--character {
+    min-width: 135px;
+    @include for-phone {
+      min-width: 110px;
+      font-size: 16px;
+    }
+  }
+}
