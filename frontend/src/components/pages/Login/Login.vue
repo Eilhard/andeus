@@ -122,7 +122,7 @@
         ],
         status: {
           type: "",
-          isShown: true,
+          isShown: false,
           message: ""
         }
       }
@@ -153,7 +153,7 @@
       }
     },
     methods: {
-      login: async function(context, payload) {
+      login: async function() {
         let login, password;
         this.inputs.forEach(item => {
           if (item.id == 'login') login = item.state;

@@ -27,9 +27,11 @@ mongoose.connect(config.mongodb, { useNewUrlParser: true, useUnifiedTopology: tr
 const bestiary = require('./api/routes/bestiary.js');
 const auth = require('./api/routes/auth.js');
 const users = require('./api/routes/users.js');
+const character = require('./api/routes/character.js');
 app.use('/api/bestia', bestiary);
 app.use('/api/auth', auth);
 app.use('/api/users', users);
+app.use('/api/character', character);
 
 app.use(logger.logErrorGlobal);
 

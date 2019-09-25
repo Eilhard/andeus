@@ -43,7 +43,6 @@ const userSchema = new Schema({
   refreshToken: {
     type: String
   }
-
 });
 
-module.exports = mongoose.model('testusers', userSchema);
+module.exports = mongoose.model('users', userSchema);

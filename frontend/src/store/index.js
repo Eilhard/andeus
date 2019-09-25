@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import user from './modules/user.js';
+import character from './modules/character.js';
 import article from './modules/article.js';
 import bestiary from './modules/bestiary.js';
 import jwt from 'jsonwebtoken';
@@ -10,6 +11,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
+    user,
+    character,
     article,
     bestiary
   },
@@ -38,6 +41,7 @@ export default new Vuex.Store({
       localStorage.setItem('refreshToken', payload.refreshToken);
       let decodedToken = jwt.decode(payload.accessToken);
       context.commit('setAccessExpiration', decodedToken.exp);
+      context.commit('user/setId', decodedToken.id);
     },
     checkAccessToken(context) {
       let exp = context.state.accessExpiration - Date.now() / 1000;

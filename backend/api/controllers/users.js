@@ -7,9 +7,9 @@ module.exports.getAll = async function (req, res) {
 }
 
 /* Working only with guard.js need jwt token*/
-module.exports.getByLogin = async function (req, res) {
+module.exports.getById = async function (req, res) {
     try {
-      let user = await User.findOne({login: req.user.login});
+      let user = await User.findOne({_id: req.user.id});
       res.status(200).send(user);
     } catch (error) {
       logger.logError(error);
