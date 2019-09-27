@@ -25,7 +25,8 @@
     box-sizing: border-box;
     @include btn-hover-tint($bg-input);
     &--active {
-      border-bottom: 2px solid $bg-input;
+      border-bottom: 3px solid $bg-input;
+      box-sizing: border-box;
     }
     &--dark {
       color: $color-secondary;

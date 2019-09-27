@@ -6,10 +6,10 @@ export default {
 
   },
   mutations: {
-
+  
   },
   getters: {
-// ${context.rootState.user.id}
+
   },
   actions: {
     getAll: async function(context) {

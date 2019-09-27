@@ -1,4 +1,5 @@
 
+/* Size mixins */
 @mixin for-desktop-medium {
   @media (max-width: 1201px) { @content; }
 }
@@ -14,6 +15,11 @@
   @media (max-width: 600px) { @content; }
 }
 
+/* Components mixins */
+@mixin card-shadow {
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
 @mixin flex-page-center {
   display: flex;
   flex-direction: column;
@@ -25,6 +31,29 @@
   }
 }
 
+@mixin flex-row-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include for-phone {
+    justify-content: flex-start;
+  }
+}
+
+
+@mixin header($header) {
+  font-weight: 600;
+  @if $header == "h1" {
+   font-size: $fsize-h1;
+ } @else if $header == "h2" {
+   font-size: $fsize-h2;
+ } @else if $header == "h3" {
+   font-size: $fsize-h3;
+ }
+}
+
+
+/* Btn mixins */
 @mixin btn-hover ($color) {
   &:hover {
     background-color: $color;
@@ -44,8 +73,4 @@
     background-color: tint($color, 50%);
     cursor: $cursor-hover;
   }
-}
-
-@mixin card-shadow {
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }

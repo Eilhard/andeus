@@ -19,9 +19,12 @@ app.use((req, res, next) => {
 });
 
 /* DB */
-mongoose.connect(config.mongodb, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected.'))
-  .catch(error => console.log(error))
+mongoose.connect(config.mongodb, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+  }).then(() => console.log('MongoDB connected.'))
+    .catch(error => console.log(error))
 
 /* Routes */
 const article = require('./api/routes/article.js');

@@ -1,0 +1,41 @@
+.text-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid $color-text-hr;
+  color: $fcolor-text;
+  &__h1 {
+    @include header(h1);
+  }
+  &__h2 {
+    @include header(h2);
+  }
+  &__h3 {
+    @include header(h3);
+  }
+  &__controls {
+    display: flex;
+  }
+}
+
+.text-body {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+}
+
+.text-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  height: 38px;
+  font-size: $fsize-primary;
+  border-radius: 50%;
+  border: none;
+  color: $color-primary;
+  background-color: $color-assets;
+  box-sizing: border-box;
+  @include btn-hover-shade($color-assets);
+}

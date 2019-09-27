@@ -28,6 +28,9 @@ export default {
     },
     setCharacters(state, payload) {
       state.characters = payload;
+    },
+    addCharacter(state, payload) {
+      state.characters.push(payload);
     }
   },
   getters: {
@@ -41,7 +44,23 @@ export default {
         context.commit('setLastname', response.data.name.lastname);
         context.commit('setEmail', response.data.email);
         context.commit('setLogin', response.data.login);
-        context.commit('setCharacters', response.data.characters);
+        let characters = await axios.get('/character', { headers: { Authorization: `Bearer ${context.rootState.accessToken}` } });
+        console.log(characters);
+        context.commit('setCharacters', characters.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    updateUser: async function(context) {
+      try {
+        let response = await axios.patch(`/users/me`, {
+            name: {
+              firstname: context.state.firstname,
+              lastname: context.state.lastname,
+            }
+          },
+          { headers: { Authorization: `Bearer ${context.rootState.accessToken}` }
+        });
       } catch (error) {
         console.log(error);
       }

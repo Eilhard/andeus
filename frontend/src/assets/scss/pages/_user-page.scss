@@ -1,9 +1,34 @@
+.user-page {
+  @include flex-page-center;
+  &-characters {
+    @include flex-row-center;
+
+  }
+}
+
 .input-group {
   &__title--character {
     min-width: 135px;
     @include for-phone {
       min-width: 110px;
       font-size: 16px;
+    }
+  }
+  &__title--user {
+    min-width: 100px;
+  }
+}
+
+.card {
+  &--character {
+    width: 100%;
+  }
+  &-header {
+    &__title--character {
+    min-width: 15vw;
+    }
+    &__text--character {
+    min-width: 10vw;
     }
   }
 }

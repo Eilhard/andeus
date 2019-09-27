@@ -9,9 +9,11 @@ $color-background-navs: #323232;
 $color-success: green;
 $color-error: red;
 
+
+
+
 $fcolor-nav: $color-assets;
-// $fcolor-nav: #747474;
-// $fcolor-nav: shade($color-secondary, 20%);
+
 
 $bg-page: $color-background;
 $bg-nav: #323232;
@@ -21,3 +23,8 @@ $bg-page-nav: $color-secondary;
 $bg-sheet: #FFFFFF;
 $bg-tabs: tint($color-background-navs, 10%);
 $bg-input: $color-secondary;
+
+
+/* Text */
+$fcolor-text: #263238;
+$color-text-hr: #90A4AE; /* blue-grey lighten-2 */

@@ -1,7 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const moment = require('moment');
 
 const userSchema = new Schema({
+  date: {
+    user: {
+      type: String,
+      default: moment().format('DD.MM.YYYY')
+    },
+    inner: {
+      type: String,
+      default: Date.now()
+    }
+  },
   name: {
     firstname: {
       type: String,

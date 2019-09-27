@@ -73,6 +73,11 @@
     padding: 0;
     background-color: inherit;
   }
+  &--clear-block {
+    width: 100%;
+    padding: 0;
+    background-color: inherit;
+  }
   &--shadow {
     @include card-shadow;
   }

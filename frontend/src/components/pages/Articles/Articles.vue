@@ -24,6 +24,7 @@
       }
     },
     mounted() {
+      if (this.articles.length > 0) return;
       this.$store.dispatch('article/getArticles');
     }
   }

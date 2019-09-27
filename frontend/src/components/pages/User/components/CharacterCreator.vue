@@ -1,51 +1,48 @@
 <template lang="html">
-  <div class="global-container login-page p--2">
-
-    <form v-on:submit.prevent class="input-container input-container--shadow">
-      <div class="tabs-menu">
-        <button
-          v-for="tab in tabs"
-          v-bind:key="`character-tab_${tab.title}`"
-          v-on:click="tab.action(tab)"
-          class="tabs-menu__tab"
-          v-bind:class="{ 'tabs-menu__tab--active': tab.isPressed }"
-        >
-          {{tab.title}}
-        </button>
-      </div>
-
-      <div
-        v-show="status.isShown"
-        class="login-status"
-        v-bind:class="{
-          'login-status--success': (status.type == 'success') ? true : false,
-          'login-status--error': (status.type == 'error') ? true : false
-        }"
-      >{{status.message}}</div>
-
-      <label
-        v-for="item in inputs"
-        v-show="item.isShown"
-        class="input-group m--1"
-      >
-        <span class="input-group__title input-group__title--character">{{item.title}}</span>
-        <input
-          class="input-group__text-input"
-          v-bind:type="item.type"
-          v-model="item.state"
-        >
-      </label>
-
+  <form v-on:submit.prevent class="input-container input-container--clear-block">
+    <div class="tabs-menu">
       <button
-        v-for="btn in submit"
-        v-show="btn.isShown"
-        v-on:click="btn.action"
-        class="input-btn input-btn--block m--1 "
+        v-for="tab in tabs"
+        v-bind:key="`character-tab_${tab.title}`"
+        v-on:click="tab.action(tab)"
+        class="tabs-menu__tab"
+        v-bind:class="{ 'tabs-menu__tab--active': tab.isPressed }"
       >
-        {{btn.title}}
+        {{tab.title}}
       </button>
-    </form>
-  </div>
+    </div>
+
+    <div
+      v-show="status.isShown"
+      class="login-status"
+      v-bind:class="{
+        'login-status--success': (status.type == 'success') ? true : false,
+        'login-status--error': (status.type == 'error') ? true : false
+      }"
+    >{{status.message}}</div>
+
+    <label
+      v-for="item in inputs"
+      v-show="item.isShown"
+      class="input-group m--1"
+    >
+      <span class="input-group__title input-group__title--character">{{item.title}}</span>
+      <input
+        class="input-group__text-input"
+        v-bind:type="item.type"
+        v-model="item.state"
+      >
+    </label>
+
+    <button
+      v-for="btn in submit"
+      v-show="btn.isShown"
+      v-on:click="btn.action"
+      class="input-btn input-btn--block m--1 "
+    >
+      {{btn.title}}
+    </button>
+  </form>
 </template>
 
 <script>
@@ -232,7 +229,8 @@
               headers: { Authorization: `Bearer ${this.$store.state.accessToken}`
             }
           });
-          console.log(response);
+          this.$store.commit('user/addCharacter', response.data);
+          this.$emit('closeCreator');
         } catch(err) {
           if (err.response.status == 500) {
             this.status.message = "Сервер не отвечает попробуйте позже.";

@@ -1,4 +1,5 @@
 const Character = require('../models/Character.js');
+const User = require('../models/User.js');
 const logger = require('../../logger/index.js');
 
 module.exports.getAll = async function (req, res) {
@@ -46,6 +47,7 @@ module.exports.create = async function (req, res) {
       money: money,
       experience: experience
     }).save();
+    await User.findOneAndUpdate({_id: req.user.id}, {$push: {characters: character._id}});
     res.send(character);
   } catch (error) {
     logger.logError(error);

@@ -124,7 +124,9 @@
       logout() {
         this.linkClick();
         this.$store.dispatch('logout');
-        this.$router.push('/');
+        if (this.$route.path != '/') {
+          this.$router.push('/');
+        }
       },
       showNav() {
         this.isNavOpen = !this.isNavOpen;

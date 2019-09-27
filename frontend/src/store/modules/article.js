@@ -17,7 +17,6 @@ export default {
     getArticles: async function(context) {
       try {
         let response = await axios.get(`/article`, { headers: { Authorization: `Bearer ${context.rootState.accessToken}` } });
-        console.log(response);
         context.commit('setArticles', response.data);
       } catch (error) {
         console.log(error);
