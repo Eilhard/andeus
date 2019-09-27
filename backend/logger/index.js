@@ -1,10 +1,6 @@
 const winston = require('winston');
 const { format } = winston;
-
-let time = () => {
-  let date = new Date();
-  return date.getDate() + "." + (date.getMonth() + 1) + "." +  date.getFullYear();
-};
+const moment = require('moment');
 
 const logFormat = format.printf(({ level, name, message, timestamp }) => {
   return `${timestamp} [${level}] ${name}: ${message}`;
@@ -20,7 +16,7 @@ const logger = winston.createLogger({
   ),
   defaultMeta: { service: 'Mirror API' },
   transports: [
-    new winston.transports.File({ filename: `./logger/log/${time()}.log`, level: 'error' }),
+    new winston.transports.File({ filename: `./logger/log/${moment().format('YYYY.MM.DD')}.log`, level: 'error' }),
   ]
 });
 

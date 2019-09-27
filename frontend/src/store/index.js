@@ -17,6 +17,7 @@ export default new Vuex.Store({
     bestiary
   },
   state: {
+    api: 'http://localhost:18000/',
     auth: false,
     accessToken: '',
     accessExpiration: 0

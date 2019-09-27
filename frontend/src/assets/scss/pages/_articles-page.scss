@@ -1,0 +1,23 @@
+.card {
+  &--article {
+    width: 30%;
+    @include for-tablet-large {
+      width: 45%;
+    }
+    @include for-tablet {
+      width: 45%;
+    }
+    @include for-phone {
+      width: 100%;
+    }
+  }
+  &-img--article {
+    height: 355px;
+    @include for-tablet {
+      height: 318px;
+    }
+    @include for-phone {
+      height: auto;
+    }
+  }
+}

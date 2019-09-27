@@ -8,7 +8,7 @@ const logger = require('./logger/index.js');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-
+app.use('/uploads', express.static('./uploads'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -24,10 +24,12 @@ mongoose.connect(config.mongodb, { useNewUrlParser: true, useUnifiedTopology: tr
   .catch(error => console.log(error))
 
 /* Routes */
+const article = require('./api/routes/article.js');
 const bestiary = require('./api/routes/bestiary.js');
 const auth = require('./api/routes/auth.js');
 const users = require('./api/routes/users.js');
 const character = require('./api/routes/character.js');
+app.use('/api/article', article);
 app.use('/api/bestia', bestiary);
 app.use('/api/auth', auth);
 app.use('/api/users', users);

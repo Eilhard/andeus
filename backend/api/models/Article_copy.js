@@ -6,11 +6,19 @@ const articleSchema = new Schema({
     type: String,
   },
   body: {
-    type: String,
+    type: [
+      {
+        sectionTitle: {
+          type: String,
+          default: ''
+        },
+        sectionBody: {
+          type: String,
+          default: ''
+        },
+      }
+    ]
   },
-  imgSrc: {
-    type: String,
-  }
 })
 
 module.exports = mongoose.model('article', articleSchema);

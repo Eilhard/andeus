@@ -1,33 +1,23 @@
 
 $color-primary: #323232;
-$color-secondary: #B39DDB;
-$color-assets: #00695C;
-$color-background: #E8EAF6;
+$color-secondary: #BBDEFB;
+
+$color-assets: #81D4FA;
+$color-background: #ECEFF1;
+$color-background-navs: #323232;
 
 $color-success: green;
 $color-error: red;
 
+$fcolor-nav: $color-assets;
+// $fcolor-nav: #747474;
+// $fcolor-nav: shade($color-secondary, 20%);
 
-/* */
-// $bg-page: #ECEFF1;
-$bg-page: #E8EAF6;
+$bg-page: $color-background;
 $bg-nav: #323232;
-$border-radius: 4px;
-// $bg-input: #90A4AE;
-// $bg-input: #64FFDA;
-// $bg-input: #B39DDB;
-$input-padding: 7px;
-$padding-tabs: 15px;
-$padding-tabs-icon: 5px;
+$bg-page-nav: $color-secondary;
 
 /* Components colors */
 $bg-sheet: #FFFFFF;
-$bg-tabs: $color-assets;
+$bg-tabs: tint($color-background-navs, 10%);
 $bg-input: $color-secondary;
-
-/* Sizes */
-$height-nav: 60px;
-$height-tabs: 35px;
-
-/* Other */
-$cursor-hover: pointer;

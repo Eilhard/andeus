@@ -1,0 +1,71 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: $border-radius;
+  border: 1px solid shade($color-secondary, 20%);
+  background-color: #E3F2FD;
+  overflow: hidden;
+  box-sizing: border-box;
+  @include card-shadow;
+  &-img {
+    width: 100%;
+    height: auto;
+  }
+  &-append {
+    display: inline-flex;
+    box-sizing: border-box;
+    &__btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: $input-padding;
+      color: shade($bg-input, 65%);
+      background-color: $bg-input;
+      border: none;
+      border-left: 1px solid shade($color-secondary, 20%);
+      box-sizing: border-box;
+      @include btn-hover-shade($bg-input);
+    }
+  }
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    &-content {
+      display: flex;
+      padding: $input-padding;
+      &--grow {
+        flex-grow: 1;
+      }
+    }
+    &__title {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+      padding: 0 $input-padding;
+      font-family: $fs-title;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    &__text {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+      padding: 0 $input-padding;
+      font-family: $fs-body;
+      @include for-phone {
+        display: none;
+      }
+    }
+  }
+  &-body {
+    display: flex;
+    padding: $input-padding;
+    font-family: $fs-body;
+    border-top: 1px solid shade($color-secondary, 20%);
+    background-color: #FFFFFF;
+  }
+}

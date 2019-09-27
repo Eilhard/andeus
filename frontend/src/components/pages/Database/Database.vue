@@ -4,9 +4,10 @@
       <nav class="tabs-menu tabs-menu--dark">
         <router-link
           to="/database/"
+          exact
           tag="button"
           class="tabs-menu__tab tabs-menu__tab--dark tabs-menu__tab-group tabs-menu__tab--page"
-          active-class="tabs-menu__tab--active"
+          active-class="tabs-menu__tab--active-dark"
         >
           <span class="tabs-menu__tab-group-title">{{links.bestiary}}</span>
           <i class="fas fa-dragon"></i>
@@ -15,7 +16,7 @@
           to="/database/items"
           tag="button"
           class="tabs-menu__tab tabs-menu__tab--dark tabs-menu__tab-group tabs-menu__tab--page"
-          active-class="tabs-menu__tab--active"
+          active-class="tabs-menu__tab--active-dark"
         >
           <span class="tabs-menu__tab-group-title">{{links.items}}</span>
           <i class="fas fa-feather-alt"></i>

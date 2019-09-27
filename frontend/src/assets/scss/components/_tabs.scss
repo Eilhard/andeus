@@ -24,12 +24,16 @@
     text-transform: uppercase;
     box-sizing: border-box;
     @include btn-hover-tint($bg-input);
-    &--dark {
-      color: tint($bg-input, 65%);
-      @include btn-hover-shade($bg-input);
-    }
     &--active {
       border-bottom: 2px solid $bg-input;
+    }
+    &--dark {
+      color: $color-secondary;
+      @include btn-hover-shade($color-secondary);
+    }
+    &--active-dark {
+      color: shade($bg-input, 70%);
+      background-color: $color-secondary;
     }
     &--page {
        flex-grow: 0;
@@ -51,10 +55,8 @@
       }
       &-icon {
         @include for-phone {
-
         }
       }
-
     }
   }
 }

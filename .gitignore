@@ -3,3 +3,5 @@ package-lock.json
 backend/api/config/config.js
 backend/api/middleware/guard.js
 backend/logger/log/*.log
+backend/uploads/*.jpg
+backend/uploads/*.png

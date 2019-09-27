@@ -21,6 +21,20 @@
     border: none;
     background-color: #ffffff;
   }
+  &__btn-append {
+    padding: $input-padding;
+    color: shade($bg-input, 65%);
+    background-color: $bg-input;
+    border: none;
+    border-left: 1px solid shade($bg-input, 20%);
+    box-sizing: border-box;
+    @include btn-hover-shade($bg-input);
+    &--dark {
+      color: shade($bg-input, 65%);
+      background-color: $bg-input;
+    }
+  }
+
 }
 
 .input-btn {
@@ -53,5 +67,13 @@
   @include for-phone {
     width: 100%;
     padding: 10px;
+  }
+  &--clear {
+    width: auto;
+    padding: 0;
+    background-color: inherit;
+  }
+  &--shadow {
+    @include card-shadow;
   }
 }

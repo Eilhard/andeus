@@ -4,3 +4,16 @@
   background-color: $bg-sheet;
   overflow: hidden;
 }
+
+.page-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.page-nav {
+  display: flex;
+  justify-content: center;
+  padding: $padding-navs;
+  background-color: $bg-page-nav;
+}

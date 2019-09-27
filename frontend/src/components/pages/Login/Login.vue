@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="global-container login-page p--2">
 
-    <form v-on:submit.prevent class="input-container">
+    <form v-on:submit.prevent class="input-container input-container--shadow">
       <div class="tabs-menu">
         <button
           v-for="tab in tabs"
