@@ -18,8 +18,12 @@
   &__text-input {
     flex-grow: 1;
     padding: $input-padding;
+    font-size: $fsize-primary;
     border: none;
     background-color: #ffffff;
+    &:disabled {
+      background-color: tint($color-assets-light, 50%);
+    }
   }
   &__btn-append {
     padding: $input-padding;

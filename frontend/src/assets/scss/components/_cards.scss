@@ -3,7 +3,7 @@
   flex-direction: column;
   border-radius: $border-radius;
   border: 1px solid shade($color-secondary, 20%);
-  background-color: #E3F2FD;
+  background-color: $color-assets-light;
   overflow: hidden;
   box-sizing: border-box;
   @include card-shadow;

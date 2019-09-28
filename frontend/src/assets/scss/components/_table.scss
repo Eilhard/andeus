@@ -1,0 +1,31 @@
+.table {
+  display: flex;
+  flex-direction: column;
+  border-radius: $border-radius;
+  box-sizing: border-box;
+  &-row {
+    display: flex;
+  }
+  &-col {
+    display: flex;
+    flex-direction: column;
+  }
+  &-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+  }
+}
+
+.table-item {
+  display: flex;
+  align-items: center;
+  border: 1px solid $color-secondary;
+  &__title {
+    background-color: lightblue;
+  }
+  &__text {
+
+  }
+}

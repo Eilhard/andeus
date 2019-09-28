@@ -48,6 +48,7 @@
         </router-link>
         <router-link
           v-on:click.native="linkClick"
+          v-show="auth"
           to="/database"
           tag="button"
           class="link link--phone-width"

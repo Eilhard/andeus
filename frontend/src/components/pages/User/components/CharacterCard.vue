@@ -4,9 +4,9 @@
       <div class="card-header-content">
         <h2 class="card-header__title card-header__title--character">{{nickname}}</h2>
         <span
-          v-if="group"
+          v-if="party"
           class="card-header__text card-header__text--character"
-        >{{prefix.group}}{{group}}</span>
+        >{{prefix.party}}{{party}}</span>
       </div>
       <div class="card-append">
         <button v-on:click="openPage" class="card-append__btn">
@@ -43,7 +43,7 @@
         type: String,
         default: 'Unknown'
       },
-      group: {
+      party: {
         type: String,
         default: ''
       },
@@ -74,7 +74,7 @@
         this.isOpen = !this.isOpen;
       },
       openPage() {
-
+        this.$router.push(`/character/${this.id}`);
       }
     }
   }

@@ -51,6 +51,12 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId
     }
   ],
+  achievements: [
+    {
+      ref: 'achievements',
+      type: Schema.Types.ObjectId,
+    }
+  ],
   refreshToken: {
     type: String
   }

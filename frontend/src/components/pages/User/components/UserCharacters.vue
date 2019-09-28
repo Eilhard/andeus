@@ -30,7 +30,7 @@
         v-bind:key="character._id"
         v-bind:id="character._id"
         v-bind:nickname="character.nickname"
-        v-bind:group="character.group"
+        v-bind:party="character.party"
         v-bind:money="character.money"
         v-bind:experience="character.experience"
       />

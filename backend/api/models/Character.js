@@ -6,6 +6,10 @@ const charactersSchema = new Schema({
     ref: 'users',
     type: Schema.Types.ObjectId,
   },
+  party: {
+    ref: 'party',
+    type: Schema.Types.ObjectId,
+  },
   nickname: {
     type: String,
     default: "Unknown"
@@ -50,6 +54,12 @@ const charactersSchema = new Schema({
       default: 10
     },
   },
+  achievements: [
+    {
+      ref: 'achievements',
+      type: Schema.Types.ObjectId,
+    }
+  ],
   money: [
     {
       title: {
