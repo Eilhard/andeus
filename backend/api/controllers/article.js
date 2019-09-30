@@ -25,3 +25,16 @@ module.exports.create = async function (req, res) {
     logger.logError(error);
   }
 }
+
+module.exports.deleteById = async function (req, res) {
+  try {
+    await Article.remove({_id: req.params.id})
+    res.status(200).send({
+      id: req.params.id,
+      message: "Article deleted"
+    });
+  } catch (error) {
+    // res.status(400).send(`Invalid token`);
+    logger.logError(error);
+  }
+}

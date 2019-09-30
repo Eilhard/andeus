@@ -19,6 +19,7 @@
           v-bind:id="article._id"
           v-bind:title="article.title"
           v-bind:imgSrc="article.imgSrc"
+          v-bind:modeDel="isDeleteMode"
         />
       </div>
     </div>
@@ -44,7 +45,7 @@
     },
     computed: {
       articles() {
-        return this.$store.state.article.articles;
+        return this.$store.getters['article/displayedArticles'];
       }
     },
     methods: {

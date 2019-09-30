@@ -1,14 +1,22 @@
 <template>
-  <article v-on:click="openPage" class="card card--article">
+  <article class="card card--article">
     <img
+      v-on:click="openPage"
       class="card-img card-img--article"
       v-bind:src="(imgSrc) ? `${api}${imgSrc}` : lostImg"
       v-bind:alt="`${title} img`"
     >
     <div class="card-header">
-      <div class="card-header-content card-header-content--grow">
+      <div v-on:click="openPage" class="card-header-content card-header-content--grow">
         <h2 class="card-header__title">{{title | titleCutter}}</h2>
       </div>
+      <button
+        v-on:click="deleteArticle"
+        v-show="modeDel"
+        class="text-btn text-btn--transparent"
+      >
+        <i class="fas fa-trash-alt"></i>
+      </button>
     </div>
   </article>
 </template>
@@ -36,6 +44,10 @@
       imgSrc: {
         type: String,
         default: ''
+      },
+      modeDel: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
@@ -51,6 +63,9 @@
     methods: {
       openPage() {
         this.$router.push(`/article/${this.id}`);
+      },
+      deleteArticle() {
+        this.$store.dispatch('article/deleteArticle', this.id);
       }
     },
 

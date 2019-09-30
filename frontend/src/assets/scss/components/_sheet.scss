@@ -9,6 +9,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  &--block {
+    width: 100%;   
+  }
 }
 
 .page-nav {

@@ -1,6 +1,6 @@
 <template lang="html">
-  <div class="">
-    <form class="input-container input-container--clear p--2" enctype="multipart/form-data">
+  <div class="page-flex page-flex--block">
+    <form v-on:submit.prevent class="input-container input-container--clear-block p--2" enctype="multipart/form-data">
       <label class="input-group mb--1">
         <span class="input-group__title input-group__title--user">
         Заголовок
@@ -11,28 +11,48 @@
         v-model="models.title"
         >
       </label>
-      <label class="input-group mb--1">
-        <span class="input-group__title input-group__title--user">
+      <label class="input-group input-group--textarea mb--1">
+        <span class="input-group__title input-group__title--textarea">
           Текст
         </span>
-        <input
-        class="input-group__text-input"
-        type="text"
+        <textarea
+        class="input-group__textarea"
         v-model="models.body"
         >
+        </textarea>
       </label>
       <label class="input-group mb--1">
+        <input
+          v-on:change="processFile($event)"
+          class="input-group__file-input"
+          type="file"
+        >
         <span class="input-group__title input-group__title--user">
           Картинка
         </span>
-        <input
-          v-on:change="processFile($event)"
-          class="input-group__text-input"
-          name="image"
-          type="file"
-        >
+        <span class="input-group__text-input">
+          {{models.image.name}}
+        </span>
+        <span class="text-btn text-btn--secondary">
+          <i class="fas fa-download"></i>
+        </span>
       </label>
     </form>
+    <NewArticleSections
+      v-for="item in sections"
+      v-bind:key="`section_${item.id}`"
+      v-bind:id="item.id"
+      v-on:updateSection="updateSection($event)"
+    />
+    <button
+      v-on:click="addSection"
+      class="input-btn input-btn--block m--1 "
+    >
+      <span class="mx--1">
+        <i class="fas fa-plus-square"></i>
+      </span>
+      Добавить секцию
+    </button>
     <button
       v-on:click="postNewArticle"
       class="input-btn input-btn--block m--1 "
@@ -43,16 +63,20 @@
 </template>
 
 <script>
+  import NewArticleSections from './NewArticleSections.vue';
 
   export default {
-
+    components: {
+      NewArticleSections
+    },
     data() {
       return {
         models: {
           title: '',
           body: '',
           image: ''
-        }
+        },
+        sections: []
       }
     },
     methods: {
@@ -67,7 +91,15 @@
           image: this.models.image,
         });
         this.$emit('switchEditor');
-      }
+      },
+      addSection() {
+        this.sections.push({ id:this.sections.length, title: '', body: '' });
+      },
+      updateSection(event) {
+        this.sections[event.id].title = event.title;
+        this.sections[event.id].body = event.body;
+        console.log(this.sections);
+      },
     },
   }
 </script>

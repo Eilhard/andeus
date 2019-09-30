@@ -1,10 +1,14 @@
 <template lang="html">
     <nav class="page-nav page-nav--space-between px--3">
-      <form class="input-container input-container--clear">
+      <form
+        v-on:submit.prevent="search"
+        class="input-container input-container--clear"
+      >
         <label
           class="input-group m--1"
         >
           <input
+            v-on:keyup="search"
             v-model="inputs.searchTitle"
             placeholder="Найти статью..."
             class="input-group__text-input"
@@ -74,7 +78,7 @@
     },
     methods: {
       search() {
-
+        this.$store.commit('article/setSearch', this.inputs.searchTitle);
       },
       switchEditor() {
         this.$emit('switchEditor');

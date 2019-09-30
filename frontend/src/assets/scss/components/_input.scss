@@ -1,5 +1,6 @@
 .input-group {
   display: flex;
+
   width: 100%;
   border: 1px solid shade($bg-input, 20%);
   border-radius: $border-radius;
@@ -9,6 +10,9 @@
   @include for-phone {
     flex-grow: 1;
   }
+  &--textarea {
+    flex-direction: column;
+  }
   &__title {
     display: inline-flex;
     justify-content: center;
@@ -17,6 +21,9 @@
     font-size: $fsize-input;
     font-weight: 600;
     color: shade($bg-input, 65%);
+    &--textarea {
+      display: flex;
+    }
   }
   &__text-input {
     flex-grow: 1;
@@ -27,6 +34,21 @@
     &:disabled {
       background-color: tint($color-assets-light, 50%);
     }
+  }
+  &__textarea {
+    min-height: 200px;
+    resize: none;
+    flex-grow: 1;
+    padding: $input-padding;
+    font-size: $fsize-primary;
+    border: none;
+    background-color: #ffffff;
+    &:disabled {
+      background-color: tint($color-assets-light, 50%);
+    }
+  }
+  &__file-input {
+    display: none;
   }
   &__btn-append {
     padding: $input-padding;
