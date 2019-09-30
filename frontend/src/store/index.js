@@ -19,12 +19,16 @@ export default new Vuex.Store({
   state: {
     api: 'http://localhost:18000/',
     auth: false,
+    isMaster: false,
     accessToken: '',
     accessExpiration: 0
   },
   mutations: {
     setAuth(state, payload) {
       state.auth = payload;
+    },
+    setIsMaster(state, payload) {
+      state.isMaster = payload;
     },
     setAccessToken(state, payload) {
       state.accessToken = payload;
@@ -43,6 +47,7 @@ export default new Vuex.Store({
       let decodedToken = jwt.decode(payload.accessToken);
       context.commit('setAccessExpiration', decodedToken.exp);
       context.commit('user/setId', decodedToken.id);
+      context.commit('setIsMaster', decodedToken.isMaster);
     },
     checkAccessToken(context) {
       let exp = context.state.accessExpiration - Date.now() / 1000;

@@ -14,6 +14,32 @@
 .page-nav {
   display: flex;
   justify-content: center;
-  padding: $padding-navs;
+  align-items: center;
+  min-height: $default-indent;
+  padding: $padding-page-header;
   background-color: $bg-page-nav;
+  @include for-phone {
+    flex-wrap: wrap;
+  }
+  &--space-between {
+    justify-content: space-between;
+    @include for-phone {
+      justify-content: center;
+    }
+  }
+}
+
+.page-nav-controls {
+  display: flex;
+  @include for-phone {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+.d-flex {
+  display: flex;
+  &--j-s-b {
+    justify-content: space-between;
+  }
 }

@@ -45,7 +45,6 @@ export default {
         context.commit('setEmail', response.data.email);
         context.commit('setLogin', response.data.login);
         let characters = await axios.get('/character', { headers: { Authorization: `Bearer ${context.rootState.accessToken}` } });
-        console.log(characters);
         context.commit('setCharacters', characters.data);
       } catch (error) {
         console.log(error);

@@ -3,6 +3,7 @@ import axios from '../../plugins/axios.js';
 export default {
   namespaced: true,
   state: {
+    id: '',
     party: '',
     nickname: '',
     firstname: '',
@@ -19,6 +20,9 @@ export default {
     experience: [],
   },
   mutations: {
+    setId(state, payload) {
+      state.id = payload;
+    },
     setParty(state, payload) {
       state.party = payload;
     },
@@ -30,6 +34,9 @@ export default {
     },
     setLastname(state, payload) {
       state.lastname = payload;
+    },
+    setGender(state, payload) {
+      state.gender = payload;
     },
     setAge(state, payload) {
       state.age = payload;
@@ -98,6 +105,23 @@ export default {
     },
   },
   actions: {
+    setCharacter(context, payload) {
+      context.commit('setId', payload._id);
+      context.commit('setParty', payload.party);
+      context.commit('setNickname', payload.nickname);
+      context.commit('setFirstname', payload.name.firstname);
+      context.commit('setLastname', payload.name.lastname);
+      context.commit('setGender', payload.gender);
+      context.commit('setAge', payload.age);
+      context.commit('setStrength', payload.attributes.strength);
+      context.commit('setAgility', payload.attributes.agility);
+      context.commit('setDexterity', payload.attributes.dexterity);
+      context.commit('setIntelligence', payload.attributes.intelligence);
+      context.commit('setVitality', payload.attributes.vitality);
+      context.commit('setAchievements', payload.achievements);
+      context.commit('setMoney', payload.money);
+      context.commit('setExperience', payload.experience);
+    },
     getAll: async function(context) {
       /* Admin command */
       try {
@@ -109,24 +133,24 @@ export default {
     },
     updateCharacter: async function(context) {
       try {
-        let response = await axios.post(`/character`, {
-            user: context.rootState.user.id,
-            nickname: "Тэд",
+        let response = await axios.patch(`/character/${context.state.id}`, {
+            party: context.state.party,
+            nickname: context.state.nickname,
             name: {
-              firstname: "Тэд",
-              lastname: "Штормран",
+              firstname: context.state.firstname,
+              lastname: context.state.lastname,
             },
-            gender: "мужской",
-            age: 45,
+            gender: context.state.gender,
+            age: context.state.age,
             attributes: {
-              strength: 25,
-              agility: 16,
-              dexterity: 16,
-              intelligence: 16,
-              vitality: 20
+              strength: context.state.strength,
+              agility: context.state.agility,
+              dexterity: context.state.dexterity,
+              intelligence: context.state.intelligence,
+              vitality: context.state.vitality
             },
-            money: [ { title: "Шестеренки", amount: 100 } ],
-            experience: [ { title: "Очки опыта", amount: 1 } ]
+            money: context.state.money,
+            experience: context.state.experience
           },
           {
             headers: { Authorization: `Bearer ${context.rootState.accessToken}`

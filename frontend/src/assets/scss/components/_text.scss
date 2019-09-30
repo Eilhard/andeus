@@ -17,6 +17,12 @@
   &__controls {
     display: flex;
   }
+  &--borderless {
+    border: none;
+  }
+  &--block {
+    width: 100%;
+  }
 }
 
 .text-body {
@@ -38,4 +44,22 @@
   background-color: $color-assets;
   box-sizing: border-box;
   @include btn-hover-shade($color-assets);
+  &--secondary {
+    background-color: $color-secondary;
+    @include btn-hover-shade($color-secondary);
+  }
+  &--white {
+    background-color: #FFFFFF;
+    @include btn-hover-shade(#FFFFFF);
+  }
+}
+
+.text-media {
+  width: auto;
+  height: 510px;
+  &__img {
+    display: inline-flex;
+    // width: auto;
+    height: 100%;
+  }
 }

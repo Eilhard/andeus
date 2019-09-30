@@ -5,20 +5,31 @@ const articleSchema = new Schema({
   title: {
     type: String,
   },
-  body: {
-    type: [
-      {
-        sectionTitle: {
-          type: String,
-          default: ''
-        },
-        sectionBody: {
-          type: String,
-          default: ''
-        },
-      }
-    ]
+  imgSrc: {
+    type: String,
+    default: ''
   },
+  body: [
+    {
+      sectionType: {
+        type: String,
+        default: 'section' // Could be 'section' 'list'
+      },
+      sectionTitle: {
+        type: String,
+        default: ''
+      },
+      sectionBody: {
+        type: String,
+        default: ''
+      },
+      imgSrc: {
+        type: String,
+        default: ''
+      },
+      listItems: [String]
+    }
+  ]
 })
 
-module.exports = mongoose.model('article', articleSchema);
+module.exports = mongoose.model('articleTest', articleSchema);

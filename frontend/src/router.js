@@ -1,6 +1,7 @@
 import VueRouter from 'vue-router';
 import Home from './components/pages/Home/Home.vue';
 import Articles from './components/pages/Articles/Articles.vue';
+import ArticleFull from './components/pages/ArticleFull/ArticleFull.vue';
 import Bestiary from './components/pages/Bestiary/Bestiary.vue';
 import Character from './components/pages/Character/Character.vue';
 import Database from './components/pages/Database/Database.vue';
@@ -20,6 +21,10 @@ export default new VueRouter({
     {
       path: '/articles',
       component: Articles
+    },
+    {
+      path: '/article/:id',
+      component: ArticleFull
     },
     {
       path: '/character/:id',

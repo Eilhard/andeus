@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    <nav class="page-nav">
+    <nav class="page-nav px--3">
       <form class="input-container input-container--clear">
         <label
           class="input-group m--1"

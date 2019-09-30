@@ -1,5 +1,5 @@
 <template>
-  <article class="card card--article">
+  <article v-on:click="openPage" class="card card--article">
     <img
       class="card-img card-img--article"
       v-bind:src="(imgSrc) ? `${api}${imgSrc}` : lostImg"
@@ -25,6 +25,10 @@
       }
     },
     props: {
+      id: {
+        type: String,
+        default: ''
+      },
       title: {
         type: String,
         default: 'unknown article'
@@ -46,7 +50,7 @@
     },
     methods: {
       openPage() {
-
+        this.$router.push(`/article/${this.id}`);
       }
     },
 
