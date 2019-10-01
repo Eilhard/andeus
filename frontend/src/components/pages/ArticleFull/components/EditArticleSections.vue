@@ -51,7 +51,6 @@
     props: {
       index: {
         type: Number,
-        default: 0
       },
       type: {
         type: String,
@@ -79,10 +78,17 @@
         },
       }
     },
+    watch: {
+      title() {
+        this.models.title = this.title;
+      },
+      body() {
+        this.models.body = this.body;
+      },
+    },
     methods: {
       processFile(event) {
         this.models.image = event.target.files[0];
-        console.log(this.models.image);
       },
       updateSection() {
         this.$emit('updateSection', {

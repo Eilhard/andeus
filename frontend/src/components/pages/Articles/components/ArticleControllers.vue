@@ -1,6 +1,8 @@
 <template lang="html">
     <nav class="page-nav page-nav--space-between px--3">
+      <div v-show="mode" class="spacer"></div>
       <form
+        v-show="!mode"
         v-on:submit.prevent="search"
         class="input-container input-container--clear"
       >
@@ -24,14 +26,14 @@
       <div class="page-nav-controls" v-show="isMaster">
         <button
           v-on:click="deleteArticles"
-          v-show="!modeDel"
+          v-show="!modeDel && !mode"
           class="text-btn text-btn--secondary"
         >
           <i class="fas fa-trash-alt"></i>
         </button>
         <button
           v-on:click="deleteArticles"
-          v-show="modeDel"
+          v-show="modeDel && !mode"
           class="text-btn text-btn--secondary"
         >
           <i class="far fa-trash-alt"></i>

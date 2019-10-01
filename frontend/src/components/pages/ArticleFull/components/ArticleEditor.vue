@@ -84,17 +84,16 @@
         }
       },
       updateSection(event) {
-        // if (!event.title && !event.body) {
-        //   this.sections.splice(event.index, 1);
-        //   return;
-        // }
-        this.sections[event.index].sectionType = 'section';
-        this.sections[event.index].title = event.title;
-        this.sections[event.index].body = event.body;
-        this.sections[event.index].listItems = [];
+        let updated = {
+          sectionType: 'section',
+          sectionTitle: event.title,
+          sectionBody: event.body,
+          listItems: []
+        }
+        this.$set(this.sections, event.index, updated);
       },
       deleteSection(event) {
-        this.sections.splice(event, 1);
+        this.sections = this.sections.filter((key, index) => index != event);
       },
       updateArticle() {
         this.$store.dispatch('article/updateArticle', {
@@ -106,8 +105,8 @@
           sections: this.sections.map(item => {
              return {
                sectionType: item.sectionType,
-               sectionTitle: item.title,
-               sectionBody: item.body,
+               sectionTitle: item.sectionTitle,
+               sectionBody: item.sectionBody,
                listItems: item.listItems
              }
           })

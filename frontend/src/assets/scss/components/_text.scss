@@ -5,6 +5,7 @@
   padding: 5px 0;
   border-bottom: 1px solid $color-text-hr;
   color: $fcolor-text;
+  font-family: $fs-title;
   &__h1 {
     @include header(h1);
   }
@@ -28,7 +29,9 @@
 .text-body {
   display: flex;
   flex-direction: column;
-  padding: 5px 0;
+  padding: $default-indent 0;
+  font-family: $fs-body;
+  font-size: $fsize-primary;
 }
 
 .text-btn {

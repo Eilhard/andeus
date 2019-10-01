@@ -7,11 +7,6 @@
         v-on:switchEditor="switchEditor"
         v-on:switchDeleteMode="switchDeleteMode"
       />
-      <div v-show="isEditorMode" class="page-flex p--2">
-        <NewArticle
-          v-on:switchEditor="switchEditor"
-        />
-      </div>
       <div v-show="!isEditorMode" class="page-flex p--2">
         <ArticleCard
           v-for="article in articles" :key="article._id"
@@ -22,6 +17,11 @@
           v-bind:modeDel="isDeleteMode"
         />
       </div>
+    </div>
+    <div v-show="isEditorMode" class="page-flex--block">
+      <NewArticle
+        v-on:switchEditor="switchEditor"
+      />
     </div>
   </div>
 </template>

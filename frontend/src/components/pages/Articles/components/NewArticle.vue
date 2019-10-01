@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="page-flex page-flex--block">
-    <form v-on:submit.prevent class="input-container input-container--clear-block p--2">
+    <form v-on:submit.prevent class="input-container sheet input-container--clear-block p--2 my--1 shadow">
       <label class="input-group mb--1">
         <span class="input-group__title input-group__title--user">
         Заголовок
@@ -39,26 +39,29 @@
       </label>
     </form>
     <NewArticleSections
+      class="sheet mb--1 shadow"
       v-for="item in sections"
       v-bind:key="`section_${item.id}`"
       v-bind:id="item.id"
       v-on:updateSection="updateSection($event)"
     />
-    <button
-      v-on:click="addSection"
-      class="input-btn input-btn--block m--1 "
-    >
-      <span class="mx--1">
-        <i class="fas fa-plus-square"></i>
-      </span>
-      Добавить секцию
-    </button>
-    <button
-      v-on:click="postNewArticle"
-      class="input-btn input-btn--block m--1 "
-    >
-      Создать статью
-    </button>
+    <div class="page-flex page-flex--block sheet p--2 mb--1">
+      <button
+        v-on:click="addSection"
+        class="input-btn input-btn--block m--1 "
+      >
+        <span class="mx--1">
+          <i class="fas fa-plus-square"></i>
+        </span>
+        Добавить секцию
+      </button>
+      <button
+        v-on:click="postNewArticle"
+        class="input-btn input-btn--block m--1 "
+      >
+        Создать статью
+      </button>
+    </div>
   </div>
 </template>
 
