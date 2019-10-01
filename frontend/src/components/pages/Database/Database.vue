@@ -12,7 +12,7 @@
           <span class="tabs-menu__tab-group-title">{{links.bestiary}}</span>
           <i class="fas fa-dragon"></i>
         </router-link>
-        <router-link
+        <!-- <router-link
           to="/database/items"
           tag="button"
           class="tabs-menu__tab tabs-menu__tab--dark tabs-menu__tab-group tabs-menu__tab--page"
@@ -20,7 +20,7 @@
         >
           <span class="tabs-menu__tab-group-title">{{links.items}}</span>
           <i class="fas fa-feather-alt"></i>
-        </router-link>
+        </router-link> -->
 
       </nav>
       <router-view></router-view>

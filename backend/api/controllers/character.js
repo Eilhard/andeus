@@ -57,6 +57,7 @@ module.exports.create = async function (req, res) {
 
 module.exports.update = async function (req, res) {
   let updated = {};
+  if (req.body.nickname) updated.nickname = req.body.nickname;
   if (req.body.name) {
     updated.name = {};
     if (req.body.name.firstname) updated.name.firstname = req.body.name.firstname;

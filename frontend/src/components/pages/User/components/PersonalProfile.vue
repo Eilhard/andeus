@@ -21,7 +21,7 @@
       <form class="input-container input-container--clear p--1">
         <label class="input-group mb--1">
           <span class="input-group__title input-group__title--user">
-            Имя:
+            Имя
           </span>
           <input
             class="input-group__text-input"
@@ -32,7 +32,7 @@
         </label>
         <label class="input-group mb--1">
           <span class="input-group__title input-group__title--user">
-            Фамилия:
+            Фамилия
           </span>
           <input
             class="input-group__text-input"

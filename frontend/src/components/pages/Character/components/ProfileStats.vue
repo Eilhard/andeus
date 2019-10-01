@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="">
     <div class="page-nav">
+      <div class="spacer"></div>
       <button
         v-on:click="switchEditor"
         v-show="!isEditorMode"
@@ -9,7 +10,7 @@
         <i class="fas fa-pencil-alt"></i>
       </button>
       <button
-        v-on:click="switchEditor"
+        v-on:click="updateCharacter"
         v-show="isEditorMode"
         class="text-btn text-btn--secondary"
       >
@@ -196,18 +197,33 @@
       switchEditor() {
         this.isEditorMode = !this.isEditorMode;
       },
-      saveChanges() {
-        let anyChanges = false;
-        if (this.models.firstname != this.firstname) anyChanges = true;
-        if (this.models.lastname != this.lastname) anyChanges = true;
-        if (!anyChanges) {
-          this.switchEditor();
-          return
-        };
-
-        this.$store.commit('character/setFirstname', this.models.firstname);
-        this.$store.commit('character/setLastname', this.models.lastname);
-        // this.$store.dispatch('character/updateCharacter');
+      updateCharacter() {
+        let nickname, firstname, lastname, gender, age, strength, agility, dexterity, intelligence, vitality;
+        this.profile.forEach((item, index) => {
+          if (item.id == 'nickname') nickname =  item.state;
+          if (item.id == 'firstname') firstname =  item.state;
+          if (item.id == 'lastname') lastname =  item.state;
+          if (item.id == 'gender') gender =  item.state;
+          if (item.id == 'age') age = item.state;
+        });
+        this.statsBasic.forEach((item, index) => {
+          if (item.id == 'strength') strength = item.state;
+          if (item.id == 'agility') agility = item.state;
+          if (item.id == 'dexterity') dexterity = item.state;
+          if (item.id == 'intelligence') intelligence = item.state;
+          if (item.id == 'vitality') vitality = item.state;
+        });
+        this.$store.commit('character/setNickname', nickname);
+        this.$store.commit('character/setFirstname', firstname);
+        this.$store.commit('character/setLastname', lastname);
+        this.$store.commit('character/setGender', gender);
+        this.$store.commit('character/setAge', age);
+        this.$store.commit('character/setStrength', strength);
+        this.$store.commit('character/setAgility', agility);
+        this.$store.commit('character/setDexterity', dexterity);
+        this.$store.commit('character/setIntelligence', intelligence);
+        this.$store.commit('character/setVitality', vitality);
+        this.$store.dispatch('character/updateCharacter');
         this.switchEditor();
       },
       setProfileStates() {
