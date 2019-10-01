@@ -18,61 +18,39 @@
     </div>
     <div class="p--1">
       <form class="input-container input-container--clear p--2">
-        <label class="input-group mb--1">
-          <span class="input-group__title input-group__title--user">
-            Прозвище:
-          </span>
-          <input
-            class="input-group__text-input"
-            type="text"
-            v-bind:disabled="!isEditorMode"
-            v-model="models.nickname"
+          <label
+            v-for="(item, index) in profile"
+            v-bind:key="`secondary_${index}`"
+            class="input-group mb--1"
           >
-        </label>
-        <label class="input-group mb--1">
-          <span class="input-group__title input-group__title--user">
-            Имя:
-          </span>
-          <input
-            class="input-group__text-input"
-            type="text"
-            v-bind:disabled="!isEditorMode"
-            v-model="models.firstname"
+            <span class="input-group__title input-group__title--user">
+              {{item.title}}
+            </span>
+            <input
+              class="input-group__text-input"
+              type="text"
+              v-bind:disabled="!isEditorMode"
+              v-model="item.state"
+            >
+          </label>
+      </form>
+      <hr class="text-hr m mx--2 mb--1">
+      <form class="input-container input-container--clear p--2">
+          <label
+            v-for="(item, index) in statsBasic"
+            v-bind:key="`secondary_${index}`"
+            class="input-group mb--1"
           >
-        </label>
-        <label class="input-group mb--1">
-          <span class="input-group__title input-group__title--user">
-            Фамилия:
-          </span>
-          <input
-            class="input-group__text-input"
-            type="text"
-            v-bind:disabled="!isEditorMode"
-            v-model="models.lastname"
-          >
-        </label>
-        <label class="input-group mb--1">
-          <span class="input-group__title input-group__title--user">
-            Пол:
-          </span>
-          <input
-            class="input-group__text-input"
-            type="text"
-            v-bind:disabled="!isEditorMode"
-            v-model="models.gender"
-          >
-        </label>
-        <label class="input-group mb--1">
-          <span class="input-group__title input-group__title--user">
-            Возраст:
-          </span>
-          <input
-            class="input-group__text-input"
-            type="text"
-            v-bind:disabled="!isEditorMode"
-            v-model="models.age"
-          >
-        </label>
+            <span class="input-group__title input-group__title--user">
+              {{item.title}}
+            </span>
+            <input
+              class="input-group__text-input"
+              type="text"
+              v-bind:disabled="!isEditorMode"
+              v-model="item.state"
+            >
+          </label>
       </form>
     </div>
 
@@ -81,23 +59,137 @@
 
 <script>
   export default {
-    props: {
-      nickname: String,
-      firstname: String,
-      lastname: String,
-      gender: String,
-      age: Number
-    },
     data() {
       return {
         isEditorMode: false,
-        models: {
-          nickname: '',
-          firstname: '',
-          lastname: '',
-          gender: '',
-          age: '',
-        }
+        profile: [
+          {
+            id: 'nickname',
+            title: "Прозвище",
+            type: "text",
+            state: ''
+          },
+          {
+            id: 'firstname',
+            title: "Имя",
+            type: "text",
+            state: ''
+          },
+          {
+            id: 'lastname',
+            title: "Фамилия",
+            type: "text",
+            state: ''
+          },
+          {
+            id: 'gender',
+            title: "Пол",
+            type: "text",
+            state: ''
+          },
+          {
+            id: 'age',
+            title: "Возраст",
+            type: "text",
+            state: ''
+          }
+        ],
+        statsBasic: [
+          {
+            id: 'strength',
+            title: "Сила",
+            type: "text",
+            state: ''
+          },
+          {
+            id: 'agility',
+            title: "Проворство",
+            type: "text",
+            state: ''
+          },
+          {
+            id: 'dexterity',
+            title: "Ловкость",
+            type: "text",
+            state: ''
+          },
+          {
+            id: 'intelligence',
+            title: "Интеллект",
+            type: "text",
+            state: ''
+          },
+          {
+            id: 'vitality',
+            title: "Выносливость",
+            type: "text",
+            state: ''
+          }
+        ],
+      }
+    },
+    computed: {
+      nickname() {
+        return this.$store.state.character.nickname;
+      },
+      firstname() {
+        return this.$store.state.character.firstname;
+      },
+      lastname() {
+        return this.$store.state.character.lastname;
+      },
+      gender() {
+        return this.$store.state.character.gender;
+      },
+      age() {
+        return this.$store.state.character.age;
+      },
+      strength() {
+        return this.$store.state.character.strength;
+      },
+      agility() {
+        return this.$store.state.character.agility;
+      },
+      dexterity() {
+        return this.$store.state.character.dexterity;
+      },
+      intelligence() {
+        return this.$store.state.character.intelligence;
+      },
+      vitality() {
+        return this.$store.state.character.vitality;
+      },
+    },
+    watch: {
+      nickname() {
+        this.setProfileStates();
+      },
+      firstname() {
+        this.setProfileStates();
+      },
+      lastname() {
+        this.setProfileStates();
+      },
+      gender() {
+        this.setProfileStates();
+      },
+      age() {
+        this.setProfileStates();
+      },
+      strength() {
+        this.setStatsBasicStates();
+      },
+      agility() {
+        this.setStatsBasicStates();
+      },
+      dexterity() {
+        this.setStatsBasicStates();
+      },
+      intelligence() {
+        this.setStatsBasicStates();
+      },
+      vitality() {
+        this.setStatsBasicStates();
       }
     },
     methods: {
@@ -117,14 +209,48 @@
         this.$store.commit('character/setLastname', this.models.lastname);
         // this.$store.dispatch('character/updateCharacter');
         this.switchEditor();
+      },
+      setProfileStates() {
+        this.profile.forEach((item, index) => {
+          if (item.id == 'nickname') {
+            this.$set(item, 'state', this.nickname);
+          }
+          if (item.id == 'firstname') {
+            this.$set(item, 'state', this.firstname);
+          }
+          if (item.id == 'lastname') {
+            this.$set(item, 'state', this.lastname);
+          }
+          if (item.id == 'gender') {
+            this.$set(item, 'state', this.gender);
+          }
+          if (item.id == 'age') {
+            this.$set(item, 'state', this.age);
+          }
+        });
+      },
+      setStatsBasicStates() {
+        this.statsBasic.forEach((item, index) => {
+          if (item.id == 'strength') {
+            this.$set(item, 'state', this.strength);
+          }
+          if (item.id == 'agility') {
+            this.$set(item, 'state', this.agility);
+          }
+          if (item.id == 'dexterity') {
+            this.$set(item, 'state', this.dexterity);
+          }
+          if (item.id == 'intelligence') {
+            this.$set(item, 'state', this.intelligence);
+          }
+          if (item.id == 'vitality') {
+            this.$set(item, 'state', this.vitality);
+          }
+        });
       }
     },
     mounted() {
-      this.models.nickname = this.nickname;
-      this.models.firstname = this.firstname;
-      this.models.lastname = this.lastname;
-      this.models.gender = this.gender;
-      this.models.age = this.age;
+
     }
   }
 </script>

@@ -16,16 +16,10 @@
       <div class="page-nav"></div>
 
       <div v-show="div.characteristics">
-        <ProfileStats
-          v-bind:nickname="character.nickname"
-          v-bind:firstname="character.name.firstname"
-          v-bind:lastname="character.name.lastname"
-          v-bind:gender="character.gender"
-          v-bind:age="character.age"
-        />
+        <ProfileStats />
       </div>
-      <div v-show="div.inventory" class="p--1">
-        <h2>Inventory</h2>
+      <div v-show="div.secondary" class="p--1">
+        <ProfileStatsSecondary />
       </div>
 
     </div>
@@ -35,11 +29,12 @@
 <script>
   import axios from '../../../plugins/axios.js';
   import ProfileStats from './components/ProfileStats.vue';
-
+  import ProfileStatsSecondary from './components/ProfileStatsSecondary.vue';
 
   export default {
     components: {
-      ProfileStats
+      ProfileStats,
+      ProfileStatsSecondary
     },
     data() {
       return {
@@ -47,22 +42,22 @@
         tabs: [
           {
             model: 'characteristics',
-            title: 'Характеристики',
+            title: 'Основные',
             icon: 'fas fa-user',
             isPressed: true,
             action: this.switchTabs
           },
           {
-            model: 'inventory',
-            title: 'Инвентарь',
-            icon: 'fas fa-boxes',
+            model: 'secondary',
+            title: 'Вторичные',
+            icon: 'fas fa-user-plus',
             isPressed: false,
             action: this.switchTabs
           }
         ],
         div: {
           characteristics: true,
-          inventory: false
+          secondary: false
         }
 
       }
@@ -96,8 +91,7 @@
       }
     },
     mounted() {
-      this.$store.dispatch('character/setCharacter',   this.character);
-      console.log(this.$store.state.character);
+      this.$store.dispatch('character/setCharacter', this.character);
     }
   }
 </script>
