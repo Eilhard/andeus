@@ -9,6 +9,7 @@ router.get('', controller.getAll);
 // router.get('/title/:title', controller.getByTitle);
 
 router.post('', guard.jwt, upload.single('image'), controller.create);
+router.patch('/:id', guard.jwt, upload.single('image'), controller.update);
 router.delete('/:id', guard.jwt, controller.deleteById);
 
 module.exports = router;

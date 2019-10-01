@@ -10,6 +10,15 @@ export default {
     setArticles(state, payload) {
       state.articles = payload;
     },
+    updateArticle(state, payload) {
+      state.articles = state.articles.map(item => {
+        if (item._id == payload._id) {
+          return payload;
+        } else {
+          return item;
+        }
+      });
+    },
     addArticle(state, payload) {
       state.articles.push(payload);
     },
@@ -35,10 +44,12 @@ export default {
       }
     },
     postNewArticle: async function(context, payload) {
-      const formData = new FormData();
+      let formData = new FormData();
        formData.append('title', payload.title);
        formData.append('body', payload.body);
        formData.append('image', payload.image);
+       formData.append('sectionImages', payload.sectionImages);
+       formData.append('sections', JSON.stringify(payload.sections));
       try {
         let response = await axios.post(`/article`,
           formData,
@@ -49,6 +60,30 @@ export default {
           }
         });
         context.commit('addArticle', response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    updateArticle: async function(context, payload) {
+      console.log("upd",payload.sections);
+      let formData = new FormData();
+       formData.append('title', payload.title);
+       formData.append('body', payload.body);
+       formData.append('image', payload.image);
+       formData.append('sectionImages', payload.sectionImages);
+       formData.append('sections', JSON.stringify(payload.sections));
+      try {
+        let response = await axios.patch(`/article/${payload.id}`,
+          formData,
+          {
+            headers: {
+              'Authorization': `Bearer ${context.rootState.accessToken}`,
+              'Content-Type': `multipart/form-data`
+          }
+        });
+        context.commit('updateArticle', response.data);
+        console.log(response.data);
+        console.log(context.state);
       } catch (error) {
         console.log(error);
       }

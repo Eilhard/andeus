@@ -69,3 +69,7 @@
     background-color: #FFFFFF;
   }
 }
+
+.shadow {
+  @include card-shadow;
+}

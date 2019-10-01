@@ -49,6 +49,9 @@
   }
   &__file-input {
     display: none;
+    &--disabled {
+      background-color: tint($color-assets-light, 50%);
+    }
   }
   &__btn-append {
     padding: $input-padding;

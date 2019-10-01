@@ -3,6 +3,16 @@
   border-radius: $border-radius;
   background-color: $bg-sheet;
   overflow: hidden;
+  &--transparent {
+    border-radius: $border-radius;
+    background-color: inherit;
+    overflow: hidden;
+  }
+  &--bg-basic {
+    border-radius: $border-radius;
+    background-color: $color-background;
+    overflow: hidden;
+  }
 }
 
 .page-flex {
@@ -10,7 +20,7 @@
   flex-wrap: wrap;
   justify-content: center;
   &--block {
-    width: 100%;   
+    width: 100%;
   }
 }
 

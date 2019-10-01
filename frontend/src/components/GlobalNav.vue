@@ -110,7 +110,7 @@
           login: 'Войти',
           logout: 'Выйти'
         },
-        isNavOpen: true
+        isNavOpen: false
       }
     },
     computed: {

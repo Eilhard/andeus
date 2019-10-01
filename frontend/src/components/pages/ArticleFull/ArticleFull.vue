@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="global-container p--2">
-    <div v-if="article"  class="sheet p--2">
-      <div v-show="!isEditorMode">
+    <div v-if="article"  class="sheet">
+      <div v-show="!isEditorMode" class="p--2">
         <ArticleHeader
           v-bind:title="article.title"
           v-bind:mode="isEditorMode"
@@ -13,26 +13,34 @@
         <div class="text-body">
           <p>{{article.body}}</p>
         </div>
-      </div>
-
-
-      <div v-show="isEditorMode" class="">
-        <ArticleEditor
-          v-on:switchEditor="switchEditor"
-          v-bind:isEditorMode="isEditorMode"
+        <ArticleSection
+          v-for="(section, index) in article.sections"
+          v-bind:key="`article-section-${index}`"
+          v-bind:title="section.sectionTitle"
+          v-bind:body="section.sectionBody"
         />
       </div>
+    </div>
+    <div v-show="isEditorMode" class="p--2">
+      <ArticleEditor
+        v-if="article"
+        v-bind:article="article"
+        v-on:switchEditor="switchEditor"
+        v-bind:isEditorMode="isEditorMode"
+      />
     </div>
   </div>
 </template>
 
 <script>
   import ArticleHeader from './components/ArticleHeader.vue';
+  import ArticleSection from './components/ArticleSection.vue';
   import ArticleEditor from './components/ArticleEditor.vue';
 
   export default {
     components: {
       ArticleHeader,
+      ArticleSection,
       ArticleEditor
     },
     data() {

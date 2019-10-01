@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="page-flex page-flex--block">
-    <form v-on:submit.prevent class="input-container input-container--clear-block p--2" enctype="multipart/form-data">
+    <form v-on:submit.prevent class="input-container input-container--clear-block p--2">
       <label class="input-group mb--1">
         <span class="input-group__title input-group__title--user">
         Заголовок
@@ -76,28 +76,45 @@
           body: '',
           image: ''
         },
-        sections: []
+        sections: [],
+        sectionImages: []
       }
     },
     methods: {
       processFile(event) {
         this.models.image = event.target.files[0];
-        console.log(this.models.image);
       },
       postNewArticle() {
         this.$store.dispatch('article/postNewArticle', {
           title: this.models.title,
           body: this.models.body,
           image: this.models.image,
+          sectionImages: this.sectionImages,
+          sections: this.sections.map(item => {
+             return {
+               sectionType: item.sectionType,
+               sectionTitle: item.title,
+               sectionBody: item.body,
+               listItems: item.listItems
+             }
+          })
         });
         this.$emit('switchEditor');
       },
       addSection() {
-        this.sections.push({ id:this.sections.length, title: '', body: '' });
+        this.sections.push({
+          id:this.sections.length,
+          sectionType: 'section',
+          title: '',
+          body: '',
+          listItems: []
+        });
       },
       updateSection(event) {
+        this.sections[event.id].sectionType = 'section';
         this.sections[event.id].title = event.title;
         this.sections[event.id].body = event.body;
+        this.sections[event.id].listItems = [];
         console.log(this.sections);
       },
     },

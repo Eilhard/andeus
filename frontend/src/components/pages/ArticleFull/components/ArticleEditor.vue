@@ -1,57 +1,60 @@
 <template lang="html">
   <div class="">
     <ArticleHeader
+      class="sheet mb--1"
       v-bind:mode="isEditorMode"
-      v-on:switchEditor="postNewArticle"
+      v-on:switchEditor="updateArticle"
     />
-    <form class="input-container input-container--clear p--2" enctype="multipart/form-data">
-      <label class="input-group mb--1">
-        <span class="input-group__title input-group__title--user">
-        Заголовок
+
+    <EditArticleMain
+      class="sheet mb--1"
+      v-bind:title="article.title"
+      v-bind:body="article.body"
+      v-on:updateMain="updateMain($event)"
+    />
+    <EditArticleSections
+      class="sheet mb--1"
+      v-for="(item, index) in sections"
+      v-bind:key="`section_${index}`"
+      v-bind:type="item.sectionType"
+      v-bind:title="item.sectionTitle"
+      v-bind:body="item.sectionBody"
+      v-bind:listItems="item.listItems"
+      v-bind:index="index"
+      v-on:updateSection="updateSection($event)"
+      v-on:deleteSection="deleteSection($event)"
+    />
+    <div class="sheet p--2 mb--1">
+      <button
+        v-on:click="addSection"
+        class="input-btn input-btn--block m--1 "
+      >
+        <span class="mx--1">
+          <i class="fas fa-plus-square"></i>
         </span>
-        <input
-        class="input-group__text-input"
-        type="text"
-        v-model="models.title"
-        >
-      </label>
-      <label class="input-group mb--1">
-        <span class="input-group__title input-group__title--user">
-          Текст
-        </span>
-        <input
-        class="input-group__text-input"
-        type="text"
-        v-model="models.body"
-        >
-      </label>
-      <label class="input-group mb--1">
-        <span class="input-group__title input-group__title--user">
-          Картинка
-        </span>
-        <input
-          v-on:change="processFile($event)"
-          class="input-group__text-input"
-          name="image"
-          type="file"
-        >
-      </label>
-    </form>
+        Добавить секцию
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
   import ArticleHeader from './ArticleHeader.vue';
+  import EditArticleMain from './EditArticleMain.vue';
+  import EditArticleSections from './EditArticleSections.vue';
 
   export default {
     components: {
       ArticleHeader,
+      EditArticleMain,
+      EditArticleSections
     },
     props: {
       isEditorMode: {
         type: Boolean,
         default: false
-      }
+      },
+      article: Object,
     },
     data() {
       return {
@@ -59,23 +62,62 @@
           title: '',
           body: '',
           image: ''
-        }
+        },
+        sections: [],
+        sectionImages: []
       }
     },
     methods: {
-      processFile(event) {
-        this.models.image = event.target.files[0];
-        console.log(this.models.image);
+      addSection() {
+        this.sections.push({
+          sectionType: 'section',
+          title: '',
+          body: '',
+          listItems: []
+        });
       },
-      postNewArticle() {
-        this.$store.dispatch('article/postNewArticle', {
+      updateMain(event) {
+        this.models.title = event.title;
+        this.models.body = event.body;
+        if (event.image) {
+          this.models.image = event.image;
+        }
+      },
+      updateSection(event) {
+        // if (!event.title && !event.body) {
+        //   this.sections.splice(event.index, 1);
+        //   return;
+        // }
+        this.sections[event.index].sectionType = 'section';
+        this.sections[event.index].title = event.title;
+        this.sections[event.index].body = event.body;
+        this.sections[event.index].listItems = [];
+      },
+      deleteSection(event) {
+        this.sections.splice(event, 1);
+      },
+      updateArticle() {
+        this.$store.dispatch('article/updateArticle', {
+          id: this.article._id,
           title: this.models.title,
           body: this.models.body,
           image: this.models.image,
+          sectionImages: this.sectionImages,
+          sections: this.sections.map(item => {
+             return {
+               sectionType: item.sectionType,
+               sectionTitle: item.title,
+               sectionBody: item.body,
+               listItems: item.listItems
+             }
+          })
         });
         this.$emit('switchEditor');
-      }
+      },
     },
+    mounted() {
+      this.sections = this.article.sections;
+    }
   }
 </script>
 
