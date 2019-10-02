@@ -65,7 +65,6 @@ export default {
       }
     },
     updateArticle: async function(context, payload) {
-      console.log("upd",payload.sections);
       let formData = new FormData();
        formData.append('title', payload.title);
        formData.append('body', payload.body);
@@ -82,8 +81,6 @@ export default {
           }
         });
         context.commit('updateArticle', response.data);
-        console.log(response.data);
-        console.log(context.state);
       } catch (error) {
         console.log(error);
       }
@@ -93,10 +90,8 @@ export default {
         let response = await axios.delete(`/article/${id}`,
           { headers: { Authorization: `Bearer ${context.rootState.accessToken}` }
         });
-        console.log(context.state.articles);
         let articles = context.state.articles.filter(item => item._id != id);
         context.commit('setArticles', articles);
-        console.log(context.state.articles);
       } catch (error) {
         console.log(error);
       }

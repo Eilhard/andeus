@@ -1,10 +1,9 @@
+import axios from '../../plugins/axios.js';
+
 export default {
   namespaced: true,
   state: {
-    bestias: [
-      { name: "Pixi", race: "Fairy", lvl: 10 },
-      { name: "Надоеда", race: "Фея", lvl: 10, description: "Это фея" }
-    ],
+    bestias: [],
     search: ''
   },
   mutations: {
@@ -38,21 +37,25 @@ export default {
   actions: {
     getBestias: async function(context) {
       try {
-        let response = await axios.get(`/article`, { headers: { Authorization: `Bearer ${context.rootState.accessToken}` } });
-        context.commit('setArticles', response.data);
+        let response = await axios.get(`/bestia`, { headers: { Authorization: `Bearer ${context.rootState.accessToken}` } });
+        context.commit('setBestias', response.data);
+        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
     },
     postNewBestia: async function(context, payload) {
       let formData = new FormData();
-       formData.append('title', payload.title);
-       formData.append('body', payload.body);
+       formData.append('name', payload.name);
+       formData.append('race', payload.race);
+       formData.append('lvl', payload.lvl);
+       formData.append('hp', payload.hp);
+       formData.append('energy', payload.energy);
+       formData.append('description', payload.description);
        formData.append('image', payload.image);
-       formData.append('sectionImages', payload.sectionImages);
-       formData.append('sections', JSON.stringify(payload.sections));
+       formData.append('loot', JSON.stringify(payload.loot));
       try {
-        let response = await axios.post(`/article`,
+        let response = await axios.post(`/bestia`,
           formData,
           {
             headers: {
@@ -60,20 +63,42 @@ export default {
               'Content-Type': `multipart/form-data`
           }
         });
-        context.commit('addArticle', response.data);
+        context.commit('addBestia', response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    updateBestia: async function(context, payload) {
+      let formData = new FormData();
+       formData.append('name', payload.name);
+       formData.append('race', payload.race);
+       formData.append('lvl', payload.lvl);
+       formData.append('hp', payload.hp);
+       formData.append('energy', payload.energy);
+       formData.append('description', payload.description);
+       formData.append('image', payload.image);
+       formData.append('loot', JSON.stringify(payload.loot));
+      try {
+        let response = await axios.patch(`/bestia/${payload.id}`,
+          formData,
+          {
+            headers: {
+              'Authorization': `Bearer ${context.rootState.accessToken}`,
+              'Content-Type': `multipart/form-data`
+          }
+        });
+        context.commit('updateBestia', response.data);
       } catch (error) {
         console.log(error);
       }
     },
     deleteBestia: async function(context, id) {
       try {
-        let response = await axios.delete(`/article/${id}`,
+        let response = await axios.delete(`/bestia/${id}`,
           { headers: { Authorization: `Bearer ${context.rootState.accessToken}` }
         });
-        console.log(context.state.articles);
-        let articles = context.state.articles.filter(item => item._id != id);
-        context.commit('setArticles', articles);
-        console.log(context.state.articles);
+        let bestias = context.state.bestias.filter(item => item._id != id);
+        context.commit('setBestias', bestias);
       } catch (error) {
         console.log(error);
       }

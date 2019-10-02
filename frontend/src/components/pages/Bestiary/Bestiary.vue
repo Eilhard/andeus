@@ -57,6 +57,10 @@
       switchDeleteMode() {
         this.isDeleteMode = !this.isDeleteMode;
       },
+    },
+    mounted() {
+      if (this.bestias.length > 0) return;
+      this.$store.dispatch('bestiary/getBestias');
     }
   }
 </script>

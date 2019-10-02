@@ -1,4 +1,4 @@
-const Bestia = require('../models/BestiaTest.js');
+const Bestia = require('../models/Bestia.js');
 const logger = require('../../logger/index.js');
 
 module.exports.getAll = async function (req, res) {
