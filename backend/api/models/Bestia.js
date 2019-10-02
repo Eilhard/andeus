@@ -22,11 +22,19 @@ const bestiaSchema = new Schema({
     type: Number,
     default: 1
   },
+  description: {
+    type: String,
+    default: ''
+  },
+  imgSrc: {
+    type: String,
+    default: ''
+  },
   loot: [
     {
-      title: {
-        type: String,
-        default: ''
+      item: {
+        ref: 'items',
+        type: Schema.Types.ObjectId
       },
       min: {
         type: Number,

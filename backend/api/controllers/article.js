@@ -1,5 +1,4 @@
 const Article = require('../models/Article.js');
-const config = require('../config/config.js');
 const logger = require('../../logger/index.js');
 
 module.exports.getAll = async function (req, res) {
@@ -7,7 +6,7 @@ module.exports.getAll = async function (req, res) {
     const articles = await Article.find({});
     res.send(articles);
   } catch (error) {
-    // res.status(400).send(`Invalid token`);
+    res.status(500).send("Can't get data. Try again later.");
     logger.logError(error);
   }
 }
@@ -23,7 +22,7 @@ module.exports.create = async function (req, res) {
     }).save();
     res.status(201).send(article);
   } catch (error) {
-    res.status(400).send(`Can't create article.`);
+    res.status(500).send(`Can't create article.`);
     logger.logError(error);
   }
 }
@@ -57,7 +56,7 @@ module.exports.deleteById = async function (req, res) {
       message: "Article deleted"
     });
   } catch (error) {
-    // res.status(400).send(`Invalid token`);
+    res.status(500).send("Can't update data. Try again later.");
     logger.logError(error);
   }
 }

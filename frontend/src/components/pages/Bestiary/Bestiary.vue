@@ -1,58 +1,62 @@
 <template lang="html">
   <div class="">
-    <nav class="page-nav px--3">
-      <form class="input-container input-container--clear">
-        <label
-          class="input-group m--1"
-        >
-          <input
-            v-model="inputs.searchName"
-            placeholder="Найти существо..."
-            class="input-group__text-input"
-          >
-          <button
-            v-on:search="search"
-            class="input-group__btn-append input-group__btn-append--dark"
-          >
-            <i class="fas fa-search"></i>
-          </button>
-        </label>
-      </form>
-    </nav>
-    <div class="p--1">
-      <BestiaCard v-for="bestia in besties" :key="bestia.id"
+    <BestiaryControllers
+      v-bind:mode="isEditorMode"
+      v-bind:modeDel="isDeleteMode"
+      v-on:switchEditor="switchEditor"
+      v-on:switchDeleteMode="switchDeleteMode"
+    />
+    <div v-show="!isEditorMode" class="p--1">
+      <BestiaCard v-for="bestia in bestias" :key="bestia.id"
         class="m--1"
-        :name="bestia.name"
-        :race="bestia.race"
-        :lvl="bestia.lvl"
-        :description="bestia.description"
+        v-bind:id="bestia._id"
+        v-bind:modeDel="isDeleteMode"
+        v-bind:name="bestia.name"
+        v-bind:race="bestia.race"
+        v-bind:lvl="bestia.lvl"
+        v-bind:description="bestia.description"
+      />
+    </div>
+    <div v-show="isEditorMode" class="page-flex--block">
+      <NewBestia
+        v-on:switchEditor="switchEditor"
       />
     </div>
   </div>
 </template>
 
 <script>
-  import BestiaCard from './components/BestiaCard.vue'
+  import BestiaryControllers from './components/BestiaryControllers.vue';
+  import BestiaCard from './components/BestiaCard.vue';
+  import NewBestia from './components/NewBestia.vue';
+
   export default {
     components: {
-      BestiaCard
+      BestiaryControllers,
+      BestiaCard,
+      NewBestia
     },
     data() {
       return {
+        isEditorMode: false,
+        isDeleteMode: false,
         inputs: {
           searchName: '',
         }
       }
     },
     computed: {
-      besties() {
-        return this.$store.state.bestiary.besties;
+      bestias() {
+        return this.$store.getters['bestiary/displayedBestias'];
       }
     },
     methods: {
-      search() {
-
-      }
+      switchEditor() {
+        this.isEditorMode = !this.isEditorMode;
+      },
+      switchDeleteMode() {
+        this.isDeleteMode = !this.isDeleteMode;
+      },
     }
   }
 </script>

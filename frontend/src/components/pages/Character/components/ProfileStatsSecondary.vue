@@ -7,12 +7,12 @@
           v-bind:key="`secondary_${index}`"
           class="input-group mb--1"
         >
-          <span class="input-group__title input-group__title--user">
+          <span class="input-group__title input-group__title--character">
             {{item.title}}
           </span>
           <input
             class="input-group__text-input"
-            type="text"
+            v-bind:type="item.type"
             v-bind:disabled="!isEditorMode"
             v-model="item.state"
           >
@@ -32,55 +32,55 @@
           {
             id: 'initiative',
             title: "Инициатива",
-            type: "text",
+            type: "number",
             state: ''
           },
           {
             id: 'accuracy',
             title: "Точность",
-            type: "text",
+            type: "number",
             state: ''
           },
           {
             id: 'evasion',
             title: "Уклонение",
-            type: "text",
+            type: "number",
             state: ''
           },
           {
             id: 'defense',
             title: "Защита",
-            type: "text",
+            type: "number",
             state: ''
           },
           {
             id: 'magicDefense',
             title: "Маг. защита",
-            type: "text",
+            type: "number",
             state: ''
           },
           {
             id: 'perception',
             title: "Восприятие",
-            type: "text",
+            type: "number",
             state: ''
           },
           {
             id: 'willpower',
             title: "Сила воли",
-            type: "text",
+            type: "number",
             state: ''
           },
           {
             id: 'healthPoints',
             title: "Здоровье",
-            type: "text",
+            type: "number",
             state: ''
           },
           {
             id: 'energyPoints',
             title: "Энергия",
-            type: "text",
+            type: "number",
             state: ''
           },
         ]

@@ -3,6 +3,7 @@ import Home from './components/pages/Home/Home.vue';
 import Articles from './components/pages/Articles/Articles.vue';
 import ArticleFull from './components/pages/ArticleFull/ArticleFull.vue';
 import Bestiary from './components/pages/Bestiary/Bestiary.vue';
+import BestiaFull from './components/pages/BestiaFull/BestiaFull.vue';
 import Character from './components/pages/Character/Character.vue';
 import Database from './components/pages/Database/Database.vue';
 import Items from './components/pages/Items/Items.vue';
@@ -29,6 +30,17 @@ export default new VueRouter({
     {
       path: '/character/:id',
       component: Character,
+      beforeEnter: function(to, from, next) {
+        if (store.state.auth) {
+          next();
+        }else{
+          next('/');
+        }
+      }
+    },
+    {
+      path: '/bestia/:id',
+      component: BestiaFull,
       beforeEnter: function(to, from, next) {
         if (store.state.auth) {
           next();

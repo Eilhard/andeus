@@ -77,7 +77,7 @@ export default {
   },
   getters: {
     initiative(state) {
-      return (state.agility + state.dexterity) / 4;
+      return (parseInt(state.agility) + parseInt(state.dexterity)) / 4;
     },
     accuracy(state) {
       return state.dexterity;

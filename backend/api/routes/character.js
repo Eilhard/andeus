@@ -3,6 +3,8 @@ const router = express.Router();
 const controller = require('../controllers/character.js');
 const guard = require('../middleware/guard.js');
 
+/* /api/character */
+
 router.get('', guard.jwt, controller.getAll);
 router.get('/:id', guard.jwt, controller.getById);
 router.post('', guard.jwt, controller.create);

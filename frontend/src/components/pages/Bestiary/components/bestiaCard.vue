@@ -11,6 +11,13 @@
         >{{prefix.lvl}}{{lvl}}</span>
       </div>
       <div class="card-append">
+        <button
+          v-on:click="deleteArticle"
+          v-show="modeDel"
+          class="card-append__btn"
+        >
+          <i class="fas fa-trash-alt"></i>
+        </button>
         <button v-on:click="openPage" class="card-append__btn">
           <i class="fas fa-book-open"></i>
         </button>
@@ -36,6 +43,14 @@
 
   export default {
     props: {
+      modeDel: {
+        type: Boolean,
+        default: false
+      },
+      id: {
+        type: String,
+        default: ''
+      },
       name: {
         type: String,
         default: 'unknown creature'
@@ -66,7 +81,10 @@
         this.isOpen = !this.isOpen;
       },
       openPage() {
-
+        this.$router.push(`/bestia/${this.id}`);
+      },
+      deleteArticle() {
+        this.$store.dispatch('bestiary/deleteBestia', this.id);
       }
     }
   }

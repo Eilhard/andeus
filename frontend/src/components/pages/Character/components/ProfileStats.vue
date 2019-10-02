@@ -24,12 +24,12 @@
             v-bind:key="`secondary_${index}`"
             class="input-group mb--1"
           >
-            <span class="input-group__title input-group__title--user">
+            <span class="input-group__title input-group__title--character">
               {{item.title}}
             </span>
             <input
               class="input-group__text-input"
-              type="text"
+              v-bind:type="item.type"
               v-bind:disabled="!isEditorMode"
               v-model="item.state"
             >
@@ -42,12 +42,12 @@
             v-bind:key="`secondary_${index}`"
             class="input-group mb--1"
           >
-            <span class="input-group__title input-group__title--user">
+            <span class="input-group__title input-group__title--character">
               {{item.title}}
             </span>
             <input
               class="input-group__text-input"
-              type="text"
+              v-bind:type="item.type"
               v-bind:disabled="!isEditorMode"
               v-model="item.state"
             >
@@ -99,31 +99,31 @@
           {
             id: 'strength',
             title: "Сила",
-            type: "text",
+            type: "number",
             state: ''
           },
           {
             id: 'agility',
             title: "Проворство",
-            type: "text",
+            type: "number",
             state: ''
           },
           {
             id: 'dexterity',
             title: "Ловкость",
-            type: "text",
+            type: "number",
             state: ''
           },
           {
             id: 'intelligence',
             title: "Интеллект",
-            type: "text",
+            type: "number",
             state: ''
           },
           {
             id: 'vitality',
             title: "Выносливость",
-            type: "text",
+            type: "number",
             state: ''
           }
         ],

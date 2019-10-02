@@ -3,6 +3,8 @@ const router = express.Router();
 const controller = require('../controllers/users.js');
 const guard = require('../middleware/guard.js');
 
+/* /api/users */
+
 /* User routes */
 router.get('/me', guard.jwt, controller.getMe);
 router.patch('/me', guard.jwt, controller.updateMe);
