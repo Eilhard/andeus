@@ -39,7 +39,6 @@ export default {
       try {
         let response = await axios.get(`/bestia`, { headers: { Authorization: `Bearer ${context.rootState.accessToken}` } });
         context.commit('setBestias', response.data);
-        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -76,7 +75,9 @@ export default {
        formData.append('hp', payload.hp);
        formData.append('energy', payload.energy);
        formData.append('description', payload.description);
-       formData.append('image', payload.image);
+       if (typeof payload.image === 'object') {
+         formData.append('image', payload.image);
+       }
        formData.append('loot', JSON.stringify(payload.loot));
       try {
         let response = await axios.patch(`/bestia/${payload.id}`,

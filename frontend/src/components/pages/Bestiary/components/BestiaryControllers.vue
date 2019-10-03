@@ -78,6 +78,11 @@
         }
       }
     },
+    computed: {
+      searchInStore() {
+        return this.$store.state.bestiary.search;
+      },
+    },
     methods: {
       search() {
         this.$store.commit('bestiary/setSearch', this.inputs.searchTitle);
@@ -88,6 +93,9 @@
       deleteArticles() {
         this.$emit('switchDeleteMode');
       }
+    },
+    mounted() {
+      this.inputs.searchTitle = this.searchInStore;
     }
   }
 </script>

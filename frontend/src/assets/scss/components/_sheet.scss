@@ -55,4 +55,8 @@
   &--j-s-b {
     justify-content: space-between;
   }
+  &--relative {
+    display: flex;
+    position: relative;
+  }
 }

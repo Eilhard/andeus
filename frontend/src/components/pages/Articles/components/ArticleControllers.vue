@@ -78,6 +78,11 @@
         }
       }
     },
+    computed: {
+      searchInStore() {
+        return this.$store.state.article.search;
+      },
+    },
     methods: {
       search() {
         this.$store.commit('article/setSearch', this.inputs.searchTitle);
@@ -88,6 +93,9 @@
       deleteArticles() {
         this.$emit('switchDeleteMode');
       }
+    },
+    mounted() {
+      this.inputs.searchTitle = this.searchInStore;
     }
   }
 </script>

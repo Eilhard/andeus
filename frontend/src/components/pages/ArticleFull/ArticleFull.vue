@@ -20,15 +20,15 @@
           v-bind:body="section.sectionBody"
         />
       </div>
+      <div v-show="isEditorMode" class="p--2">
+        <ArticleEditor
+          v-bind:article="article"
+          v-on:switchEditor="switchEditor"
+          v-bind:isEditorMode="isEditorMode"
+        />
+      </div>
     </div>
-    <div v-show="isEditorMode" class="p--2">
-      <ArticleEditor
-        v-if="article"
-        v-bind:article="article"
-        v-on:switchEditor="switchEditor"
-        v-bind:isEditorMode="isEditorMode"
-      />
-    </div>
+    
   </div>
 </template>
 

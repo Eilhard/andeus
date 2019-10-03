@@ -18,6 +18,10 @@
   &__controls {
     display: flex;
   }
+  &--title {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
   &--borderless {
     border: none;
   }
@@ -67,6 +71,9 @@
     &:hover {
       background-color: inherit;
     }
+  }
+  &--large {
+    font-size: $fsize-h1;
   }
 }
 

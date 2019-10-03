@@ -22,7 +22,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    background-color: #fcf0e4;
+    background-color: #ECEFF1;
     &__img {
       width: 40vw;
       @media (max-width: 600px) {
