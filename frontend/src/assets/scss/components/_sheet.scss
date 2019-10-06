@@ -52,6 +52,19 @@
 
 .d-flex {
   display: flex;
+  &-col {
+    display: flex;
+    flex-direction: column;
+    &--block {
+      width: 100%;
+    }
+  }
+  &-row {
+    display: flex;
+    @include for-phone {
+      flex-wrap: wrap;
+    }
+  }
   &--j-s-b {
     justify-content: space-between;
   }

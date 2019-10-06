@@ -6,3 +6,18 @@
   min-width: 10vw;
   }
 }
+
+.bestia-body {
+  &__img {
+    width: 100%;
+    height: auto;
+    &-container {
+      display: flex;
+      align-items: flex-start;
+      max-width: 40vw;
+      @include for-phone {
+        max-width: 100%;
+      }
+    }
+  }
+}

@@ -6,9 +6,11 @@ const upload = require('../middleware/upload.js');
 
 /* /api/article */
 
-router.get('', controller.getAll);
-router.post('', guard.jwt, upload.single('image'), controller.create);
-router.patch('/:id', guard.jwt, upload.single('image'), controller.update);
-router.delete('/:id', guard.jwt, controller.deleteById);
+router.get('', guard.jwt, controller.getAll);
+
+/* Admin routes */
+router.post('',  guard.master, upload.single('image'), controller.create);
+router.patch('/:id', guard.master, upload.single('image'), controller.update);
+router.delete('/:id', guard.master, controller.deleteById);
 
 module.exports = router;

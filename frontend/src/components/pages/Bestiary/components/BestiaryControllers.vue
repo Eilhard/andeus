@@ -58,7 +58,7 @@
           </button>
         </label>
       </form>
-      <div class="page-nav-controls" v-show="isMaster">
+      <div class="page-nav-controls" v-if="isMaster">
         <button
           v-on:click="deleteArticles"
           v-show="!modeDel && !mode"
@@ -107,7 +107,6 @@
     },
     data(){
       return {
-        isMaster: true,
         inputs: {
           searchTitle: '',
           searchRace: null,
@@ -122,6 +121,9 @@
       bestiesRaces() {
         return this.$store.state.bestiary.races;
       },
+      isMaster() {
+        return this.$store.state.isMaster;
+      }
     },
     methods: {
       search() {

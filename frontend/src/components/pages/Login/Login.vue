@@ -76,7 +76,7 @@
             title: "Имя",
             type: "text",
             isShown: false,
-            state: 'Terry'
+            state: ''
           },
           {
             model: 'register',
@@ -84,7 +84,7 @@
             title: "Фамилия",
             type: "text",
             isShown: false,
-            state: 'Scarry'
+            state: ''
           },
           {
             model: 'register',
@@ -92,7 +92,7 @@
             title: "Email",
             type: "email",
             isShown: false,
-            state: 'terry@gmail.com'
+            state: ''
           },
           {
             model: 'all',
@@ -100,7 +100,7 @@
             title: "Логин",
             type: "text",
             isShown: true,
-            state: "Terry"
+            state: ""
           },
           {
             model: 'all',
@@ -108,7 +108,7 @@
             title: "Пароль",
             type: "password",
             isShown: true,
-            state: "12345"
+            state: ""
           },
         ],
         submit: [
@@ -195,13 +195,35 @@
       },
       register: async function() {
         let firstname, lastname, login, password, email;
+        let fieldError = { status: false, message: '' };
         this.inputs.forEach(item => {
+          if (fieldError.status) return;
           if (item.id == 'firstname') firstname = item.state;
           if (item.id == 'lastname') lastname = item.state;
-          if (item.id == 'email') email = item.state;
+          if (item.id == 'email') {
+            email = item.state;
+            let validEmail = /.{1,}@.{1,}/
+            if (!validEmail.test(email)) {
+              fieldError.status = true;
+              fieldError.message = "Вы неверно ввели почту.";
+            }
+          }
           if (item.id == 'login') login = item.state;
-          if (item.id == 'password') password = item.state;
+          if (item.id == 'password') {
+            password = item.state;
+            let validPassword = /.{6,}/
+            if (!validPassword.test(password)) {
+              fieldError.status = true;
+              fieldError.message = "В пароле должно быть минимум 6 символов.";
+            }
+          }
         });
+        if (fieldError.status) {
+          this.status.type = 'error';
+          this.status.isShown = true;
+          this.status.message = fieldError.message;
+          return
+        }
         let response;
         try {
           response = await axios.post('auth/register', {
@@ -241,7 +263,7 @@
       switchTabs(currentTab) {
         this.status.isShown = false;
         this.mode = currentTab.model;
-      }
+      },
     }
   }
 </script>

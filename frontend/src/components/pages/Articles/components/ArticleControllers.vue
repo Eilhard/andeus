@@ -23,7 +23,7 @@
           </button>
         </label>
       </form>
-      <div class="page-nav-controls" v-show="isMaster">
+      <div class="page-nav-controls" v-if="isMaster">
         <button
           v-on:click="deleteArticles"
           v-show="!modeDel && !mode"
@@ -72,7 +72,6 @@
     },
     data(){
       return {
-        isMaster: true,
         inputs: {
           searchTitle: ''
         }
@@ -82,6 +81,9 @@
       searchInStore() {
         return this.$store.state.article.search;
       },
+      isMaster() {
+        return this.$store.state.isMaster;
+      }
     },
     methods: {
       search() {

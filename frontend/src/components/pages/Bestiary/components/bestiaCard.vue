@@ -4,9 +4,11 @@
       <div class="card-header-content">
         <h2 class="card-header__title card-header__title--bestia">{{name}}</h2>
         <span
+          v-if="race"
           class="card-header__text card-header__text--bestia"
         >{{race}}</span>
         <span
+          v-if="lvl && lvl > 0"
           class="card-header__text card-header__text--bestia"
         >{{prefix.lvl}}{{lvl}}</span>
       </div>

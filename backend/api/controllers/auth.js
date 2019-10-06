@@ -57,6 +57,11 @@ module.exports.register = async function (req, res) {
   }
   let password;
   if (req.body.password) {
+    let validPassword = /.{6,}/
+    if (!validPassword.test(req.body.password)) {
+      res.status(400).send("Your password should contain at least 6 characters");
+      return
+    }
     let salt = bcrypt.genSaltSync(10);
     password = bcrypt.hashSync(req.body.password, salt);
   }

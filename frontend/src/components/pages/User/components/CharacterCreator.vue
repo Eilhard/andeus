@@ -73,7 +73,7 @@
             title: "Прозвище",
             type: "text",
             isShown: true,
-            state: 'Сонный Тэд'
+            state: ''
           },
           {
             model: 'personal',
@@ -81,7 +81,7 @@
             title: "Имя",
             type: "text",
             isShown: true,
-            state: 'Тэд'
+            state: ''
           },
           {
             model: 'personal',
@@ -89,7 +89,7 @@
             title: "Фамилия",
             type: "text",
             isShown: true,
-            state: 'Гримм'
+            state: ''
           },
           {
             model: 'personal',
@@ -97,7 +97,7 @@
             title: "Пол",
             type: "text",
             isShown: true,
-            state: "мужской"
+            state: ""
           },
           {
             model: 'personal',
@@ -105,7 +105,7 @@
             title: "Возраст",
             type: "number",
             isShown: true,
-            state: "45"
+            state: ""
           },
           {
             model: 'attributes',
@@ -113,7 +113,7 @@
             title: "Сила",
             type: "number",
             isShown: false,
-            state: 12
+            state: 0
           },
           {
             model: 'attributes',
@@ -121,7 +121,7 @@
             title: "Проворство",
             type: "number",
             isShown: false,
-            state: 16
+            state: 0
           },
           {
             model: 'attributes',
@@ -129,7 +129,7 @@
             title: "Ловкость",
             type: "number",
             isShown: false,
-            state: 16
+            state: 0
           },
           {
             model: 'attributes',
@@ -137,7 +137,7 @@
             title: "Интеллект",
             type: "number",
             isShown: false,
-            state: 10
+            state: 0
           },
           {
             model: 'attributes',
@@ -145,7 +145,7 @@
             title: "Выносливость",
             type: "number",
             isShown: false,
-            state: 8
+            state: 0
           },
         ],
         submit: [

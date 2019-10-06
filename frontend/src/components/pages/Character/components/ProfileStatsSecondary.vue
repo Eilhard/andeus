@@ -195,7 +195,7 @@
       }
     },
     mounted() {
-      // this.setInputsStates();
+      this.setInputsStates();
     }
   }
 </script>

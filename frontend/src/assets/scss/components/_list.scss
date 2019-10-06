@@ -1,0 +1,81 @@
+.list-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  border-radius: $border-radius;
+  background-color: #fff;
+  overflow: hidden;
+  @include for-phone {
+    width: 100%;
+    padding: 10px;
+  }
+  &--clear {
+    width: auto;
+    padding: 0;
+    background-color: inherit;
+    @include for-phone {
+      width: 100%;
+    }
+  }
+  &--row {
+    flex-direction: row;
+    @include for-phone {
+      flex-wrap: wrap;
+    }
+  }
+  &--clear-block {
+    width: 100%;
+    padding: 0;
+    background-color: inherit;
+  }
+  &--shadow {
+    @include card-shadow;
+  }
+}
+
+.list-group-item {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  &__title {
+    display: inline-flex;
+    justify-content: center;
+    padding: $input-padding;
+    width: 130px;
+    border: none;
+    border-radius: $border-radius;
+    font-family: $fs-title;
+    font-size: $fsize-secondary;
+    font-weight: 600;
+    color: shade($bg-input, 65%);
+    background-color: $bg-input;
+  }
+  &__text {
+    flex-grow: 1;
+    padding: $input-padding;
+    font-family: $fs-body;
+    font-size: $fsize-secondary;
+    font-weight: 400;
+    border: none;
+    background-color: #ffffff;
+    &:disabled {
+      background-color: tint($color-assets-light, 50%);
+    }
+  }
+  &__btn-append {
+    padding: $input-padding;
+    color: shade($bg-input, 65%);
+    background-color: $bg-input;
+    border: none;
+    border-left: 1px solid shade($bg-input, 20%);
+    box-sizing: border-box;
+    @include btn-hover-shade($bg-input);
+    &--dark {
+      color: shade($bg-input, 65%);
+      background-color: $bg-input;
+    }
+  }
+}

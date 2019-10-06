@@ -10,8 +10,8 @@ router.get('/me', guard.jwt, controller.getMe);
 router.patch('/me', guard.jwt, controller.updateMe);
 
 /* Admin routes */
-router.get('', guard.jwt, guard.master, controller.getAll);
-router.get('/:id', guard.jwt, guard.master, controller.getById);
-router.delete('', guard.jwt, guard.master, controller.delete);
+router.get('', guard.master, controller.getAll);
+router.get('/:id', guard.master, controller.getById);
+router.delete('', guard.master, controller.delete);
 
 module.exports = router;

@@ -266,7 +266,8 @@
       }
     },
     mounted() {
-
+      this.setProfileStates();
+      this.setStatsBasicStates();
     }
   }
 </script>

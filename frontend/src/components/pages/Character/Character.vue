@@ -83,7 +83,7 @@
             this.div[key] = false;
           }
         }
-      }
+      },
     },
     methods: {
       switchTabs(currentTab) {
