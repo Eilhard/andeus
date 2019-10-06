@@ -21,11 +21,25 @@ export default new VueRouter({
     },
     {
       path: '/articles',
-      component: Articles
+      component: Articles,
+      beforeEnter: function(to, from, next) {
+        if (store.state.auth) {
+          next();
+        }else{
+          next('/');
+        }
+      }
     },
     {
       path: '/article/:id',
-      component: ArticleFull
+      component: ArticleFull,
+      beforeEnter: function(to, from, next) {
+        if (store.state.auth) {
+          next();
+        }else{
+          next('/');
+        }
+      }
     },
     {
       path: '/character/:id',
@@ -96,5 +110,15 @@ export default new VueRouter({
       path: '*',
       component: LostPage
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if (to.hash) {
+      return { selector: to.hash }
+    }
+    // else if (savedPosition) {
+    //   return savedPosition
+    // } else {
+    //   return { x: 0, y: 0 }
+    // }
+  }
 })

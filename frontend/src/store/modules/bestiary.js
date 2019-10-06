@@ -4,7 +4,10 @@ export default {
   namespaced: true,
   state: {
     bestias: [],
-    search: ''
+    search: '',
+    races: [],
+    searchRace: '',
+    searchLvl: null
   },
   mutations: {
     setBestias(state, payload) {
@@ -24,14 +27,38 @@ export default {
     },
     setSearch(state, payload) {
       state.search = payload;
-    }
+    },
+    setSearchLvl(state, payload) {
+      state.searchLvl = payload;
+    },
+    setSearchRace(state, payload) {
+      state.searchRace = payload;
+    },
+    setRaces(state) {
+      state.races = [...new Set(
+        state.bestias.map(item => item.race)
+      )];
+    },
   },
   getters: {
     displayedBestias(state) {
-      if (!state.search) return state.bestias;
-      return state.bestias.filter(item => {
-        return item.name.slice(0, state.search.length).toLowerCase() == state.search.toLowerCase();
-      });
+      let bestias = state.bestias;
+      if (state.search) {
+        bestias = bestias.filter(item => {
+          return item.name.slice(0, state.search.length).toLowerCase() == state.search.toLowerCase();
+        });
+      }
+      if (state.searchLvl > 0) {
+        bestias = bestias.filter(item => {
+          return item.lvl == parseInt(state.searchLvl);
+        });
+      }
+      if (state.searchRace && state.searchRace.toLowerCase() != 'all') {
+        bestias = bestias.filter(item => {
+          return item.race == state.searchRace;
+        });
+      }
+      return bestias;
     }
   },
   actions: {
@@ -39,6 +66,7 @@ export default {
       try {
         let response = await axios.get(`/bestia`, { headers: { Authorization: `Bearer ${context.rootState.accessToken}` } });
         context.commit('setBestias', response.data);
+        context.commit('setRaces');
       } catch (error) {
         console.log(error);
       }

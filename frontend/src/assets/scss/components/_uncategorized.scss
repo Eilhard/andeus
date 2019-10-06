@@ -1,0 +1,12 @@
+.anchor {
+  position: absolute;
+  height: $height-nav;
+  margin-top: -$height-nav;
+  /* Fix for phone behavior on btn click */
+  @include for-phone {
+    margin-top: -$height-nav*2;
+  }
+  &-container {
+    position: relative;
+  }
+}

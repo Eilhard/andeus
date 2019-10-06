@@ -1,8 +1,14 @@
 <template lang="html">
   <div class="">
-    <div v-if="imgSrc" class="text-media">
-      <img class="text-media__img" v-bind:src="`${api}${imgSrc}`" v-bind:alt="name">
+    <div class="d-flex">
+      <div class="">
+        Hello
+      </div>
+      <div v-if="imgSrc" class="text-media">
+        <img class="text-media__img" v-bind:src="`${api}${imgSrc}`" v-bind:alt="name">
+      </div>
     </div>
+
     <div class="text-body">
       <p>{{description}}</p>
     </div>

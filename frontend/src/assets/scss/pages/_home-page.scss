@@ -38,3 +38,65 @@
     z-index: 0;
   }
 }
+
+.greetings-section {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - #{$height-nav});
+}
+
+.greeting-article {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: calc(100vh - #{$height-nav});
+}
+
+.user-home-articles {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-wrap: nowrap;
+  @include for-phone {
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+}
+
+.card {
+  &--home-page {
+    width: 25%;
+    @include for-tablet-large {
+      width: 45%;
+    }
+    @include for-tablet {
+      width: 45%;
+    }
+    @include for-phone {
+      width: 100%;
+    }
+  }
+  &-img--home-page {
+    height: 295px;
+    @include for-tablet-large {
+      height: 220px;
+    }
+    @include for-tablet {
+      height: 175px;
+    }
+    @include for-phone {
+      display: none;
+      height: auto;
+    }
+  }
+}
+
+.text-header {
+  &__h2 {
+    &--home-page {
+      text-align: left;
+    }
+  }
+}

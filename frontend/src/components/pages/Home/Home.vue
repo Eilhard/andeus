@@ -4,19 +4,21 @@
       v-if="!auth"
       class="sheet"
     />
-
-    <div v-if="auth" class="">
-
-    </div>
+    <UserHome
+      v-if="auth"
+      class="sheet"
+    />
   </div>
 </template>
 
 <script>
-  import Greetings from './components/Greetings.vue'
+  import Greetings from './components/Greetings.vue';
+  import UserHome from './components/UserHome.vue';
 
   export default {
     components: {
-      Greetings
+      Greetings,
+      UserHome
     },
     computed: {
       auth() {

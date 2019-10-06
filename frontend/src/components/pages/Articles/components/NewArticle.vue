@@ -40,10 +40,12 @@
     </form>
     <NewArticleSections
       class="sheet mb--1 shadow"
-      v-for="item in sections"
+      v-for="(item, index) in sections"
       v-bind:key="`section_${item.id}`"
       v-bind:id="item.id"
+      v-bind:index="index"
       v-on:updateSection="updateSection($event)"
+      v-on:deleteSection="deleteSection($event)"
     />
     <div class="page-flex page-flex--block sheet p--2 mb--1">
       <button
@@ -120,6 +122,9 @@
         this.sections[event.id].listItems = [];
         console.log(this.sections);
       },
+      deleteSection(event) {
+        this.sections = this.sections.filter((key, index) => index != event);
+      }
     },
   }
 </script>

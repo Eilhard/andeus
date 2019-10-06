@@ -1,3 +1,13 @@
+/* global-nav-container was added to fix height problem with sticky nav */
+
+.global-nav-container {
+  display: flex;
+  height: $height-nav;
+  @include for-phone {
+    height: auto;
+  }
+}
+
 .global-nav {
   display: flex;
   justify-content: center;
@@ -7,8 +17,14 @@
   height: $height-nav;
   color: #FFFFFF;
   background-color: #323232;
+  z-index: 99;
   @include for-phone {
     height: auto;
+  }
+  &--sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
   }
 }
 .link {

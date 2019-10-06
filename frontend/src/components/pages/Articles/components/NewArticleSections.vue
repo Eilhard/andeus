@@ -10,6 +10,12 @@
       type="text"
       v-model="models.title"
       >
+      <button
+        v-on:click="deleteSection"
+        class="text-btn text-btn--secondary"
+      >
+        <i class="fas fa-trash-alt"></i>
+      </button>
     </label>
     <label class="input-group input-group--textarea mb--1">
       <span class="input-group__title input-group__title--textarea">
@@ -46,7 +52,10 @@
       id: {
         type: Number,
         default: 0
-      }
+      },
+      index: {
+        type: Number,
+      },
     },
     data() {
       return {
@@ -72,6 +81,9 @@
       },
       switchEditor() {
         this.isEditorMode = !this.isEditorMode;
+      },
+      deleteSection() {
+        this.$emit('deleteSection', this.index);
       }
     }
   }

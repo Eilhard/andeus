@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const partySchema = new Schema({
+  date: {
+    type: Number,
+    default: Date.now
+  },
   title: {
     type: String,
     default: 'Unnamed party'

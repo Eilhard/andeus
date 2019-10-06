@@ -47,7 +47,7 @@
         this.$emit('switchEditor');
       },
       backToBestiary() {
-        this.$router.push('/database');
+        this.$router.back();
       }
     },
 

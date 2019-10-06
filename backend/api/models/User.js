@@ -4,14 +4,8 @@ const moment = require('moment');
 
 const userSchema = new Schema({
   date: {
-    user: {
-      type: String,
-      default: moment().format('DD.MM.YYYY')
-    },
-    inner: {
-      type: String,
-      default: Date.now()
-    }
+    type: Number,
+    default: Date.now
   },
   name: {
     firstname: {

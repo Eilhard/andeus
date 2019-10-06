@@ -47,7 +47,7 @@
         this.$emit('switchEditor');
       },
       backToArticles() {
-        this.$router.push('/articles');
+        this.$router.back();
       }
     },
 

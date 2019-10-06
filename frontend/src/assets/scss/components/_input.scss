@@ -13,6 +13,9 @@
   &--textarea {
     flex-direction: column;
   }
+  &--nav {
+    width: 240px;
+  }
   &__title {
     display: inline-flex;
     justify-content: center;
@@ -26,6 +29,16 @@
     }
   }
   &__text-input {
+    flex-grow: 1;
+    padding: $input-padding;
+    font-size: $fsize-primary;
+    border: none;
+    background-color: #ffffff;
+    &:disabled {
+      background-color: tint($color-assets-light, 50%);
+    }
+  }
+  &__select {
     flex-grow: 1;
     padding: $input-padding;
     font-size: $fsize-primary;
@@ -107,6 +120,13 @@
       width: 100%;
     }
   }
+  &--row {
+    flex-direction: row;
+    @include for-phone {
+      flex-wrap: wrap;
+    }
+
+  }
   &--clear-block {
     width: 100%;
     padding: 0;
@@ -115,4 +135,5 @@
   &--shadow {
     @include card-shadow;
   }
+
 }

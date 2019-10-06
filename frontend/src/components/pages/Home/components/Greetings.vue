@@ -4,7 +4,7 @@
       <div class="greetings__text-container">
         <h1 class="greetings__text greetings__text--title my--3">Добро пожаловать</h1>
         <p class="greetings__text mb--3">
-          Вы попали на домашнюю страницу словестно-ролевой игры Хроношторм.
+          Вы попали на домашнюю страницу словестной ролевой игры Хроношторм.
         </p>
         <button
           v-on:click="switchDescription"
@@ -27,27 +27,45 @@
         alt="greetings image"
       >
     </div>
-    <div v-show="isDescriptionOpen" class="">
-      <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h2>
+    <div
+      v-show="isDescriptionOpen"
+      class="greetings-section p--3 anchor-container"
+    >
+      <div class="anchor" id="description"></div>
+      <GreetingArticle />
     </div>
   </div>
 </template>
 
 <script>
   import greetingsImg from '../../../../assets/img/greetings.jpg';
+  import GreetingArticle from './GreetingArticle.vue';
 
   export default {
+    components: {
+      GreetingArticle
+    },
     data() {
       return {
         greetingsImg,
-        isDescriptionOpen: false
+        isDescriptionOpen: false,
       }
     },
     methods: {
       switchDescription() {
         this.isDescriptionOpen = !this.isDescriptionOpen;
+        if (this.isDescriptionOpen) {
+          this.$router.push({ hash: '#description' });
+        } else {
+          this.$router.push({ path: '' });
+        }
       }
-    }
+    },
+    mounted() {
+      if (this.$route.hash) {
+        this.isDescriptionOpen = true;
+      }
+    },
   }
 </script>
 
