@@ -40,7 +40,4 @@ app.use('/api/character', character);
 
 app.use(logger.logErrorGlobal);
 
-let url = 'mongodb://localhost:27017/'
-
-
 app.listen(config.port, config.ip, () => { console.log(`Server initiated on ${config.ip}:${config.port}`); })
